@@ -8,6 +8,7 @@ use SilverStripe\ORM\FieldType\DBDatetime;
 use SilverStripe\ORM\ManyManyList;
 use SilverStripe\TagField\TagField;
 use WeDevelop\Portfolio\Controllers\PortfolioPageController;
+use WeDevelop\Portfolio\ElementalGrid\ElementPortfolio;
 use WeDevelop\Portfolio\Models\Category;
 use WeDevelop\Portfolio\Models\Collection;
 use WeDevelop\Portfolio\Models\Customer;
@@ -51,9 +52,13 @@ class CasePage extends \Page
         'Thumbnail',
     ];
 
-    private static array $belongs_many_many = [
+    private static array $many_many = [
         'Categories' => Category::class,
+    ];
+
+    private static array $belongs_many_many = [
         'Collections' => Collection::class,
+        'ElementPortfolios' => ElementPortfolio::class,
     ];
 
     private static array $default_sort = [

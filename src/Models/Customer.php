@@ -3,16 +3,28 @@
 namespace WeDevelop\Portfolio\Models;
 
 use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\GridField\GridFieldConfig_RecordViewer;
 use SilverStripe\Forms\HeaderField;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 use SilverStripe\Forms\TextField;
 use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Assets\Image;
+use SilverStripe\ORM\HasManyList;
 use WeDevelop\Portfolio\ElementalGrid\ElementPortfolio;
 use WeDevelop\Portfolio\Pages\CasePage;
 use WeDevelop\Portfolio\Pages\PortfolioPage;
 
+/**
+ * @property string $Title
+ * @property string $URL
+ * @property string $FacebookURL
+ * @property string $TwitterURL
+ * @property string $LinkedInURL
+ * @method CasePage|HasManyList CasePages()
+ * @method Image Logo()
+ */
 class Customer extends DataObject
 {
     private static string $table_name = 'WeDevelop_Portfolio_Customer';
@@ -29,10 +41,10 @@ class Customer extends DataObject
 
     private static array $db = [
         'Title' => 'Varchar(255)',
-        'URL' => 'Varchar',
-        'FacebookURL' => 'Varchar',
-        'TwitterURL' => 'Varchar',
-        'LinkedInURL' => 'Varchar',
+        'URL' => 'Varchar(255)',
+        'FacebookURL' => 'Varchar(255)',
+        'TwitterURL' => 'Varchar(255)',
+        'LinkedInURL' => 'Varchar(255)',
     ];
 
     private static array $has_one = [
@@ -43,7 +55,7 @@ class Customer extends DataObject
         'Logo',
     ];
 
-    private static array $many_many = [
+    private static array $has_many = [
         'CasePages' => CasePage::class,
     ];
 
@@ -53,8 +65,8 @@ class Customer extends DataObject
 
         $fields->removeByName(
             [
-                'CasePagesID',
                 'URL',
+                'CasePages',
                 'Logo',
                 'FacebookURL',
                 'TwitterURL',
@@ -64,10 +76,15 @@ class Customer extends DataObject
 
         $fields->renameField('Title', 'Name');
 
+        $fields->addFieldsToTab('Root.Cases assigned to', [
+            GridField::create('CasePages', 'Case pages', $this->CasePages(), new GridFieldConfig_RecordViewer()),
+        ]);
+
         $fields->addFieldsToTab(
             'Root.Main',
             [
                 UploadField::create('Logo', 'Logo')->setFolderName('Customer_Logos'),
+                TextField::create('URL', 'URL'),
                 HeaderField::create('', 'Social media'),
                 TextField::create('FacebookURL', 'Facebook URL'),
                 TextField::create('TwitterURL', 'Twitter URL'),

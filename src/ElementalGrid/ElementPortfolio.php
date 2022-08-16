@@ -3,6 +3,7 @@
 namespace WeDevelop\Portfolio\ElementalGrid;
 
 use DNADesign\Elemental\Models\BaseElement;
+use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
@@ -10,15 +11,19 @@ use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldAddNewButton;
 use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
 use SilverStripe\Forms\GridField\GridFieldEditButton;
+use SilverStripe\Forms\HeaderField;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\NumericField;
 use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\TreeDropdownField;
 use SilverStripe\ORM\DataList;
 use SilverStripe\ORM\HasManyList;
+use SilverStripe\Versioned\GridFieldArchiveAction;
 use SilverStripe\VersionedAdmin\Extensions\ArchiveRestoreAction;
 use UncleCheese\DisplayLogic\Forms\Wrapper;
 use WeDevelop\Portfolio\Models\Collection;
 use WeDevelop\Portfolio\Pages\CasePage;
+use WeDevelop\Portfolio\Pages\PortfolioPage;
 
 /**
  * @property int $CollectionID
@@ -45,19 +50,20 @@ class ElementPortfolio extends BaseElement
 
     private const MODE_COLLECTION = 'collection';
 
-    private static array $has_one = [
-        'Collection' => Collection::class,
-    ];
-
-    private static array $many_many = [
-        'CasePages' => Collection::class,
-    ];
-
     private static array $db = [
         'ShowMoreCasesButton' => 'Boolean',
         'MaxAmount' => 'Int(3)',
         'ShowMoreCasesButtonText' => 'Varchar(255)',
         'Mode' => 'Varchar(255)',
+    ];
+
+    private static array $has_one = [
+        'Collection' => Collection::class,
+        'PortfolioPage' => PortfolioPage::class,
+    ];
+
+    private static array $many_many = [
+        'CasePages' => CasePage::class,
     ];
 
     private static array $defaults = [
@@ -71,7 +77,7 @@ class ElementPortfolio extends BaseElement
         $gridConfig = new GridFieldConfig_RelationEditor();
         $gridConfig->removeComponentsByType([
             GridFieldAddNewButton::class,
-            ArchiveRestoreAction::class,
+            GridFieldArchiveAction::class,
             GridFieldEditButton::class,
         ]);
 
@@ -87,8 +93,10 @@ class ElementPortfolio extends BaseElement
                 'ShowMoreCasesButton',
                 'MaxAmount',
                 'Mode',
+                'CasePages',
                 'ShowMoreCasesButtonText',
                 'PortfolioPageID',
+                'CollectionID',
             ]
         );
 
@@ -96,27 +104,32 @@ class ElementPortfolio extends BaseElement
             $fields->addFieldsToTab(
                 'Root.Main',
                 [
+                    DropdownField::create('Mode', 'Cases selection mode', [
+                        self::MODE_COLLECTION => 'Choose from collection',
+                        self::MODE_CUSTOM => 'Choose custom',
+                    ]),
                     Wrapper::create([
                         DropdownField::create('CollectionID', 'Collection', Collection::get()->map()->toArray()),
-                    ])->displayIf('Mode')->isEqualTo('collection')->end(),
+                    ])->displayIf('Mode')->isEqualTo(self::MODE_COLLECTION)->end(),
                     Wrapper::create([
-                        GridField::create('Cases', 'Cases', CasePage::get(), $gridConfig),
-                    ])->displayIf('Mode')->isEqualTo('custom')->end(),
+                        GridField::create('CasePages', 'Cases', $this->CasePages(), $gridConfig)->addExtraClass('mt-5'),
+                    ])->displayIf('Mode')->isEqualTo(self::MODE_CUSTOM)->end(),
+                    HeaderField::create('Show more button')->setHeadingLevel(1)->addExtraClass('mt-5'),
+                    CheckboxField::create(
+                        'ShowMoreCasesButton',
+                        _t(__CLASS__ . '.SHOWMOREBUTTON', "Show 'more cases' button")
+                    ),
+                    Wrapper::create([
+                        TextField::create(
+                            'ShowMoreCasesButtonText',
+                            _t(__CLASS__ . '.MOREBUTTONTEXT', "'More cases' button text")
+                        ),
+                        TreeDropdownField::create('PortfolioPageID', 'Portfolio page', SiteTree::class)
+                    ])->displayIf('ShowMoreCasesButton')->isChecked()->end(),
                     NumericField::create(
                         'MaxAmount',
-                        _t(__CLASS__ . '.MAXAMOUNT', 'Max. amount of articles shown')
+                        _t(__CLASS__ . '.MAXAMOUNT', 'Max. amount of cases shown')
                     ),
-                    CheckboxField::create(
-                        'ShowMoreArticlesButton',
-                        _t(__CLASS__ . '.SHOWMOREBUTTON', "Show 'more articles' button")
-                    ),
-                    TextField::create(
-                        'ShowMoreArticlesButtonText',
-                        _t(__CLASS__ . '.SHOWMOREBUTTONTEXT', "Show 'more articles' button text")
-                    )
-                        ->displayIf('ShowMoreArticlesButton')
-                        ->isChecked()
-                        ->end(),
                 ]
             );
         } else {
@@ -124,8 +137,6 @@ class ElementPortfolio extends BaseElement
                 new LiteralField('', 'Save the element first, in order to be able to make changes to the contents of this collection.')
             ]);
         }
-
-        $this->extend('onAfterUpdateCMSFields', $fields);
 
         return $fields;
     }

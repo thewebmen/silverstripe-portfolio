@@ -42,7 +42,7 @@ class Category extends DataObject
         'PortfolioPage' => PortfolioPage::class,
     ];
 
-    private static array $many_many = [
+    private static array $belongs_many_many = [
         'CasePages' => CasePage::class,
     ];
 

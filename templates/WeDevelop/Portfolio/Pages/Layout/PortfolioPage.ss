@@ -1,6 +1,12 @@
 <section class="block section">
     <div class="container">
         <h1>$Title</h1>
+        <% if $UseElementalGrid %>
+            $ElementalArea
+        <% else_if $Content %>
+            $Content
+        <% end_if %>
+        <hr />
         <div class="columns row">
             <div class="col-md-4 column is-4-desktop">
                 <div class="card card-body">
@@ -21,11 +27,6 @@
                             </li>
                         <% end_loop %>
                     </ul>
-                    <hr />
-                <% end_if %>
-
-                <% if $Content %>
-                    $Content
                     <hr />
                 <% end_if %>
 
