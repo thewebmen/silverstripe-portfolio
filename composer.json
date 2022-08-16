@@ -1,0 +1,37 @@
+{
+    "name": "wedevelop/silverstripe-portfolio",
+    "description": "Portfolio module",
+    "keywords": [
+        "silverstripe",
+        "portfolio"
+    ],
+    "authors": [{
+        "name": "WeDevelop",
+        "email": "development@wedevelop.nl"
+    }],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=8.0",
+        "silverstripe/cms": "^4@stable",
+        "silverstripe/vendor-plugin": "^1.0",
+        "silverstripe/lumberjack": "^2.0",
+        "micschk/silverstripe-gridfieldsitetreebuttons": "^2.0",
+        "silverstripe/tagfield": "^2.7",
+        "unclecheese/display-logic": "^2.0"
+    },
+    "extra": {
+        "installer-name": "silverstripe-portfolio",
+        "branch-alias": {
+            "dev-main": "1.x-dev"
+        },
+        "expose": [
+            "client/dist"
+        ]
+    },
+    "autoload": {
+        "psr-4": {
+            "WeDevelop\\Portfolio\\": "src/"
+        }
+    }
+}

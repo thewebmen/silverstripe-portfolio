@@ -1,0 +1,6 @@
+---
+Name: portfolio
+---
+WeDevelop\Portfolio\Pages\PortfolioPage:
+  extensions:
+    - SilverStripe\Lumberjack\Model\LumberJack
