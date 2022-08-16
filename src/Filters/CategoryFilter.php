@@ -1,9 +1,9 @@
 <?php
 
-namespace TheWebmen\Articles\Filters;
+namespace WeDevelop\Portfolio\Filters;
 
 use SilverStripe\ORM\DataList;
-use TheWebmen\Articles\Interfaces\FilterInterface;
+use WeDevelop\Portfolio\Interfaces\FilterInterface;
 use WeDevelop\Portfolio\Models\Category;
 
 final class CategoryFilter implements FilterInterface

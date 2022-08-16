@@ -14,7 +14,7 @@
         <hr />
         $Content
         <hr />
-        <h3><%t Category.Plural "Categories" %></h3>
+        <h3><%t WeDevelop\Portfolio\Models\Category.PLURALNAME "Categories" %></h3>
         <ul>
             <% loop $Categories %>
                 <li>

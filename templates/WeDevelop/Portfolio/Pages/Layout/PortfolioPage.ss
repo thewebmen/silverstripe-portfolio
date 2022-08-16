@@ -14,23 +14,7 @@
                 </div>
             </div>
             <div class="col-md-8 column is-8-desktop">
-                <h2><%t TheWebmen\Articles\Pages\CasePage.PLURALNAME "Cases" %></h2>
-                <hr />
-                <% if $Categories %>
-                    <h3>
-                        <%t Category.Plural "Categories" %>
-                    </h3>
-                    <ul>
-                        <% loop $Categories %>
-                            <li>
-                                <span>$Title</span>
-                            </li>
-                        <% end_loop %>
-                    </ul>
-                    <hr />
-                <% end_if %>
-
-                <h3>All cases (paginated)</h3>
+                <h2><%t WeDevelop\Portfolio\Pages\CasePage.PLURALNAME "Cases" %></h2>
                 <% if $PaginatedCases %>
                     <ul>
                         <% loop $PaginatedCases %>
@@ -62,7 +46,7 @@
                     <% end_with %>
                 <% else %>
                     <p>
-                        <%t Articles.NoArticlesFound "No cases found" %>
+                        <%t WeDevelop\Portfolio\Pages\PortfolioPage.NOCASESFOUND "No cases found" %>
                     </p>
                 <% end_if %>
             </div>

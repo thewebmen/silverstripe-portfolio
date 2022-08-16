@@ -2,9 +2,9 @@
     <$TitleTag class="$TitleSizeClass">$Title.RAW</$TitleTag>
 <% end_if %>
 <hr />
-$Cases.Count <%t Case.Plural "Cases" %>
+$Cases.Count <%t WeDevelop\Portfolio\ElementalGrid\CasePage.PLURALNAME "Cases" %>
 <hr /><br />
-<h3><%t ElementPortfolio.Results "Results" %></h3>
+<h3><%t WeDevelop\Portfolio\ElementalGrid\ElementPortfolio.RESULTS "Results" %></h3>
 <% if $Cases %>
     <ul>
         <% loop $Cases %>

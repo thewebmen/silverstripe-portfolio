@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace WeDevelop\Portfolio\Services;
 
 use SilverStripe\ORM\DataList;
-use TheWebmen\Articles\Filters\CategoryFilter;
+use WeDevelop\Portfolio\Filters\CategoryFilter;
 
 final class CaseFilterService
 {

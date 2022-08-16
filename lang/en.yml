@@ -1,41 +1,29 @@
 en:
-  TheWebmen\Articles\Pages\ArticlePage:
-    PLURALNAME: 'Articles'
+  WeDevelop\Portfolio\Pages\CasePage:
+    PLURALNAME: 'Cases'
     PLURALS:
-      one: 'An article'
-      other: '{count} articles'
-    SINGULARNAME: 'Article'
-  TheWebmen\Articles\Pages\ArticlesPage:
-    PLURALNAME: 'Article overview pages'
+      one: 'A case'
+      other: '{count} cases'
+    SINGULARNAME: 'Case'
+  WeDevelop\Portfolio\Pages\PortfolioPage:
+    PLURALNAME: 'Case overview pages'
     PLURALS:
-      one: 'An article overview page'
-      other: '{count} article overview pages'
-    SINGULARNAME: 'Article overview page'
-    ARTICLES: 'Articles'
+      one: 'A case overview page'
+      other: '{count} case overview pages'
+    SINGULARNAME: 'Case overview page'
+    CASES: 'Cases'
     db_PageLength: 'Page length'
-  TheWebmen\Articles\Extensions:
-    has_many_Articles: 'Articles'
-  TheWebmen\Articles\Pages\ArticleThemePage:
-    PLURALNAME: 'Themes'
+  WeDevelop\Portfolio\Extensions:
+    has_many_Articles: 'Cases'
+  WeDevelop\Portfolio\Models\Customer:
+    PLURALNAME: 'Customers'
     PLURALS:
-      one: 'A theme'
-      other: '{count} themes'
-    SINGULARNAME: 'Theme'
-  TheWebmen\Articles\Pages\ArticleTypePage:
-    PLURALNAME: 'Types'
+      one: 'A customer'
+      other: '{count} customers'
+    SINGULARNAME: 'Customer'
+  WeDevelop\Portfolio\Models\Category:
+    PLURALNAME: 'Categories'
     PLURALS:
-      one: 'A type'
-      other: '{count} types'
-    SINGULARNAME: 'Type'
-  TheWebmen\Articles\Models\Author:
-    PLURALNAME: 'Authors'
-    PLURALS:
-      one: 'An author'
-      other: '{count} authors'
-    SINGULARNAME: 'Author'
-  TheWebmen\Articles\Models\Tag:
-    PLURALNAME: 'Tags'
-    PLURALS:
-      one: 'A tag'
-      other: '{count} tags'
-    SINGULARNAME: 'Tag'
+      one: 'A category'
+      other: '{count} categories'
+    SINGULARNAME: 'Category'
