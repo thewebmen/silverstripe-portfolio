@@ -16,7 +16,7 @@ $Cases.Count <%t Case.Plural "Cases" %>
 <% else %>
     <p><%t WeDevelop\Portfolio\ElementalGrid\ElementPortfolio.NOCASESFOUND "No cases found" %></p>
 <% end_if %>
-<% if $ShowMoreCasesButton %>
+<% if $ShowMoreCasesButton && $PortfolioPage %>
     <a href="$PortfolioPage.Link" class="btn button is-primary btn-sm btn-primary">
         $ShowMoreCasesButtonText
     </a>

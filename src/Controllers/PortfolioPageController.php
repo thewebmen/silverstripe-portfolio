@@ -83,7 +83,6 @@ class PortfolioPageController extends \PageController
         $URLFilters = $this->getFiltersFromURL();
         $filterService = new CaseFilterService($this->cases);
 
-        var_dump($URLFilters);
         if ($URLFilters['category']) {
             $filterService->applyCategoryFilter(explode(',', $URLFilters['category']));
         }
