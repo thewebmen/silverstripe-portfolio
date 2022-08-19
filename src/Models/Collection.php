@@ -38,9 +38,12 @@ class Collection extends DataObject
         'Title',
     ];
 
+    private static array $has_many = [
+        'ElementPortfolios' => ElementPortfolio::class,
+    ];
+    
     private static array $many_many = [
         'CasePages' => CasePage::class,
-        'ElementPortfolios' => ElementPortfolio::class,
     ];
 
     public function getCMSFields(): FieldList
