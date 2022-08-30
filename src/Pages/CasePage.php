@@ -2,7 +2,9 @@
 
 namespace WeDevelop\Portfolio\Pages;
 
+use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Assets\Image;
+use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\FieldType\DBDatetime;
 use SilverStripe\ORM\ManyManyList;
@@ -74,8 +76,14 @@ class CasePage extends \Page
                 'Categories',
                 _t('WeDevelop\Portfolio\Models\Category.PLURALNAME', 'Categories'),
                 Category::get()->filter('PortfolioPageID', $this->ParentID),
-                $this->Categories()
-            )->setCanCreate(false)
+                $this->Categories(),
+            )->setCanCreate(false),
+            DropdownField::create(
+                'CustomerID',
+                _t('WeDevelop\Portfolio\Models\Customer.SINGULARNAME', 'Customer'),
+                Customer::get()->map()->toArray()
+            )->setHasEmptyDefault(true),
+            UploadField::create('Thumbnail', _t(__CLASS__ . '.THUMBNAIL', 'Thumbnail')),
         ]);
 
         return $fields;
