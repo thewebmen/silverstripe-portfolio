@@ -148,11 +148,11 @@ class ElementPortfolio extends BaseElement
 
     public function getCases(): ?DataList
     {
-        if ($this->Mode === self::MODE_CUSTOM) {
+        if ($this->Mode === self::MODE_CUSTOM && $this->CasePages()) {
             return $this->CasePages();
         }
 
-        if ($this->Mode === self::MODE_COLLECTION) {
+        if ($this->Mode === self::MODE_COLLECTION && $this->Collection()->exists()) {
             return $this->Collection()->CasePages();
         }
 
