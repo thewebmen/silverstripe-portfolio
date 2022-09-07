@@ -16,14 +16,9 @@ class PortfolioPageController extends \PageController
 {
     protected DataList $cases;
 
-    public function getThemes(): ?DataList
+    public function getCategories(): ?DataList
     {
-        return $this->data()->hasMethod('getThemes') ? $this->data()->getThemes() : null;
-    }
-
-    public function getTypes(): ?DataList
-    {
-        return $this->data()->hasMethod('getTypes') ? $this->data()->getTypes() : null;
+        return $this->data()->getCategories();
     }
 
     public function CasesFilterForm(): CasesFilterForm
@@ -83,8 +78,8 @@ class PortfolioPageController extends \PageController
         $URLFilters = $this->getFiltersFromURL();
         $filterService = new CaseFilterService($this->cases);
 
-        if ($URLFilters['category']) {
-            $filterService->applyCategoryFilter(explode(',', $URLFilters['category']));
+        if ($URLFilters['categories']) {
+            $filterService->applyCategoryFilter(explode(',', $URLFilters['categories']));
         }
 
         $this->cases = $filterService->getCases();
@@ -93,18 +88,13 @@ class PortfolioPageController extends \PageController
     public function hasActiveFilters(): bool
     {
         $URLFilters = $this->getFiltersFromURL();
-        return (bool)$URLFilters['category'];
-    }
-
-    public function getCategories(): ?DataList
-    {
-        return $this->data()->hasMethod('getCategories') ? $this->data()->getCategories() : null;
+        return (bool)$URLFilters['categories'];
     }
 
     public function getFiltersFromURL(): array
     {
         return [
-            'category' => $this->getRequest()->getVar('category'),
+            'categories' => $this->getRequest()->getVar('category'),
         ];
     }
 }
