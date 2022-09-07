@@ -12,6 +12,7 @@ use SilverStripe\Forms\GridField\GridFieldAddNewButton;
 use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
 use SilverStripe\Forms\GridField\GridFieldEditButton;
 use SilverStripe\Forms\HeaderField;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\NumericField;
 use SilverStripe\Forms\TextField;
@@ -51,6 +52,7 @@ class ElementPortfolio extends BaseElement
     private const MODE_COLLECTION = 'collection';
 
     private static array $db = [
+        'Content' => 'HTMLText',
         'ShowMoreCasesButton' => 'Boolean',
         'MaxAmount' => 'Int(3)',
         'ShowMoreCasesButtonText' => 'Varchar(255)',
@@ -104,6 +106,7 @@ class ElementPortfolio extends BaseElement
             $fields->addFieldsToTab(
                 'Root.Main',
                 [
+                    HTMLEditorField::create('Content', 'Content'),
                     DropdownField::create('Mode', 'Cases selection mode', [
                         self::MODE_COLLECTION => 'Choose from collection',
                         self::MODE_CUSTOM => 'Choose custom',
