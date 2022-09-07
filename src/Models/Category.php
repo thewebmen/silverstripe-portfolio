@@ -3,12 +3,16 @@
 namespace WeDevelop\Portfolio\Models;
 
 use SilverStripe\CMS\Controllers\CMSPageEditController;
+use SilverStripe\Control\Controller;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldConfig_RecordViewer;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\ManyManyList;
 use SilverStripe\View\Parsers\URLSegmentFilter;
+use TheWebmen\Articles\Controllers\ArticlesPageController;
+use TheWebmen\Articles\Pages\ArticleThemePage;
+use WeDevelop\Portfolio\Controllers\PortfolioPageController;
 use WeDevelop\Portfolio\Pages\CasePage;
 use WeDevelop\Portfolio\Pages\PortfolioPage;
 
@@ -64,6 +68,19 @@ class Category extends DataObject
         return $fields;
     }
 
+    public function IsActive(): bool
+    {
+        /** @var PortfolioPageController $controller */
+        $controller = Controller::curr();
+        $URLFilters = $controller->getFiltersFromURL();
+        $categories = $URLFilters['categories'];
+
+        if (in_array($this->Slug, explode(',', $categories ?? ''))) {
+            return true;
+        }
+
+        return false;
+    }
     protected function onBeforeWrite(): void
     {
         $currentPageID = CMSPageEditController::curr()->currentPageID();
