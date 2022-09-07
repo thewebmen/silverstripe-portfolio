@@ -63,15 +63,13 @@ class CasePage extends \Page
         'ElementPortfolios' => ElementPortfolio::class,
     ];
 
-    private static array $default_sort = [
-        'PublicationDate' => 'DESC',
-    ];
+    private static string $default_sort = 'PublicationDate DESC';
 
     public function getCMSFields(): FieldList
     {
         $fields = parent::getCMSFields();
 
-        $fields->addFieldsToTab('Root.Main', [
+        $fields->addFieldsToTab('Root.ProjectSettings', [
             TagField::create(
                 'Categories',
                 _t('WeDevelop\Portfolio\Models\Category.PLURALNAME', 'Categories'),
