@@ -12,6 +12,7 @@ use SilverStripe\Forms\LiteralField;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\ManyManyList;
 use SilverStripe\Versioned\GridFieldArchiveAction;
+use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 use WeDevelop\Portfolio\ElementalGrid\ElementPortfolio;
 use WeDevelop\Portfolio\Pages\CasePage;
 
@@ -41,9 +42,15 @@ class Collection extends DataObject
     private static array $has_many = [
         'ElementPortfolios' => ElementPortfolio::class,
     ];
-    
+
     private static array $many_many = [
         'CasePages' => CasePage::class,
+    ];
+
+    private static array $many_many_extraFields = [
+        'CasePages' => [
+            'CasesSort' => 'Int'
+        ]
     ];
 
     public function getCMSFields(): FieldList
@@ -56,6 +63,7 @@ class Collection extends DataObject
             GridFieldArchiveAction::class,
             GridFieldEditButton::class,
         ]);
+        $casesGridConfig->addComponent(new GridFieldOrderableRows('CasesSort'));
 
         $elementalGridConfig = new GridFieldConfig_RecordViewer();
 
