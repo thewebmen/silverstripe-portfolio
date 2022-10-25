@@ -21,6 +21,7 @@ use SilverStripe\ORM\DataList;
 use SilverStripe\ORM\HasManyList;
 use SilverStripe\Versioned\GridFieldArchiveAction;
 use SilverStripe\VersionedAdmin\Extensions\ArchiveRestoreAction;
+use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 use UncleCheese\DisplayLogic\Forms\Wrapper;
 use WeDevelop\Portfolio\Models\Collection;
 use WeDevelop\Portfolio\Pages\CasePage;
@@ -68,6 +69,12 @@ class ElementPortfolio extends BaseElement
         'CasePages' => CasePage::class,
     ];
 
+    private static array $many_many_extraFields = [
+        'CasePages' => [
+            'CasesSort' => 'Int'
+        ]
+    ];
+
     private static array $defaults = [
         'MaxAmount' => 10,
     ];
@@ -82,6 +89,7 @@ class ElementPortfolio extends BaseElement
             GridFieldArchiveAction::class,
             GridFieldEditButton::class,
         ]);
+        $gridConfig->addComponent(new GridFieldOrderableRows('CasesSort'));
 
         $fields->addFieldsToTab('Root.Main', [
             DropdownField::create('Mode', 'Mode', [
@@ -152,11 +160,11 @@ class ElementPortfolio extends BaseElement
     public function getCases(): ?DataList
     {
         if ($this->Mode === self::MODE_CUSTOM && $this->CasePages()) {
-            return $this->CasePages();
+            return $this->CasePages()->Sort('CasesSort');
         }
 
         if ($this->Mode === self::MODE_COLLECTION && $this->Collection()->exists()) {
-            return $this->Collection()->CasePages();
+            return $this->Collection()->CasePages()->Sort('CasesSort');
         }
 
         return null;
