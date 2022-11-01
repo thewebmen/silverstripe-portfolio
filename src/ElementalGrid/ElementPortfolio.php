@@ -81,75 +81,68 @@ class ElementPortfolio extends BaseElement
 
     public function getCMSFields(): FieldList
     {
-        $fields = parent::getCMSFields();
+        $this->beforeUpdateCMSFields(function (FieldList $fields) {
+            $gridConfig = new GridFieldConfig_RelationEditor();
+            $gridConfig->removeComponentsByType([
+                GridFieldAddNewButton::class,
+                GridFieldArchiveAction::class,
+                GridFieldEditButton::class,
+            ]);
+            $gridConfig->addComponent(new GridFieldOrderableRows('CasesSort'));
 
-        $gridConfig = new GridFieldConfig_RelationEditor();
-        $gridConfig->removeComponentsByType([
-            GridFieldAddNewButton::class,
-            GridFieldArchiveAction::class,
-            GridFieldEditButton::class,
-        ]);
-        $gridConfig->addComponent(new GridFieldOrderableRows('CasesSort'));
-
-        $fields->addFieldsToTab('Root.Main', [
-            DropdownField::create('Mode', 'Mode', [
-                self::MODE_COLLECTION => 'Select by collection',
-                self::MODE_CUSTOM => 'Select custom cases',
-            ]),
-        ]);
-
-        $fields->removeByName(
-            [
-                'ShowMoreCasesButton',
-                'MaxAmount',
-                'Mode',
-                'CasePages',
-                'ShowMoreCasesButtonText',
-                'PortfolioPageID',
-                'CollectionID',
-            ]
-        );
-
-        if ($this->exists()) {
-            $fields->addFieldsToTab(
-                'Root.Main',
+            $fields->removeByName(
                 [
-                    HTMLEditorField::create('Content', 'Content'),
-                    DropdownField::create('Mode', 'Cases selection mode', [
-                        self::MODE_COLLECTION => 'Choose from collection',
-                        self::MODE_CUSTOM => 'Choose custom',
-                    ]),
-                    Wrapper::create([
-                        DropdownField::create('CollectionID', 'Collection', Collection::get()->map()->toArray()),
-                    ])->displayIf('Mode')->isEqualTo(self::MODE_COLLECTION)->end(),
-                    Wrapper::create([
-                        GridField::create('CasePages', 'Cases', $this->CasePages(), $gridConfig)->addExtraClass('mt-5'),
-                    ])->displayIf('Mode')->isEqualTo(self::MODE_CUSTOM)->end(),
-                    HeaderField::create('Show more button')->setHeadingLevel(1)->addExtraClass('mt-5'),
-                    CheckboxField::create(
-                        'ShowMoreCasesButton',
-                        _t(__CLASS__ . '.SHOWMOREBUTTON', "Show 'more cases' button")
-                    ),
-                    Wrapper::create([
-                        TextField::create(
-                            'ShowMoreCasesButtonText',
-                            _t(__CLASS__ . '.MOREBUTTONTEXT', "'More cases' button text")
-                        ),
-                        TreeDropdownField::create('PortfolioPageID', 'Portfolio page', SiteTree::class)
-                    ])->displayIf('ShowMoreCasesButton')->isChecked()->end(),
-                    NumericField::create(
-                        'MaxAmount',
-                        _t(__CLASS__ . '.MAXAMOUNT', 'Max. amount of cases shown')
-                    ),
+                    'ShowMoreCasesButton',
+                    'MaxAmount',
+                    'Mode',
+                    'CasePages',
+                    'ShowMoreCasesButtonText',
+                    'PortfolioPageID',
+                    'CollectionID',
                 ]
             );
-        } else {
-            $fields->addFieldsToTab('Root.Main', [
-                new LiteralField('', 'Save the element first, in order to be able to make changes to the contents of this collection.')
-            ]);
-        }
 
-        return $fields;
+            if ($this->exists()) {
+                $fields->addFieldsToTab(
+                    'Root.Main',
+                    [
+                        HTMLEditorField::create('Content', 'Content'),
+                        DropdownField::create('Mode', 'Cases selection mode', [
+                            self::MODE_COLLECTION => 'Choose from collection',
+                            self::MODE_CUSTOM => 'Choose custom',
+                        ]),
+                        Wrapper::create([
+                            DropdownField::create('CollectionID', 'Collection', Collection::get()->map()->toArray()),
+                        ])->displayIf('Mode')->isEqualTo(self::MODE_COLLECTION)->end(),
+                        Wrapper::create([
+                            GridField::create('CasePages', 'Cases', $this->CasePages(), $gridConfig)->addExtraClass('mt-5'),
+                        ])->displayIf('Mode')->isEqualTo(self::MODE_CUSTOM)->end(),
+                        HeaderField::create('Show more button')->setHeadingLevel(1)->addExtraClass('mt-5'),
+                        CheckboxField::create(
+                            'ShowMoreCasesButton',
+                            _t(__CLASS__ . '.SHOWMOREBUTTON', "Show 'more cases' button")
+                        ),
+                        Wrapper::create([
+                            TextField::create(
+                                'ShowMoreCasesButtonText',
+                                _t(__CLASS__ . '.MOREBUTTONTEXT', "'More cases' button text")
+                            ),
+                            TreeDropdownField::create('PortfolioPageID', 'Portfolio page', SiteTree::class)
+                        ])->displayIf('ShowMoreCasesButton')->isChecked()->end(),
+                        NumericField::create(
+                            'MaxAmount',
+                            _t(__CLASS__ . '.MAXAMOUNT', 'Max. amount of cases shown')
+                        ),
+                    ]
+                );
+            } else {
+                $fields->addFieldsToTab('Root.Main', [
+                    new LiteralField('', 'Save the element first, in order to be able to make changes to the contents of this collection.')
+                ]);
+            }
+        });
+
+        return parent::getCMSFields();
     }
 
     public function getType(): string
