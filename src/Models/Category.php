@@ -90,7 +90,7 @@ class Category extends DataObject
             $this->PortfolioPageID = $currentPage->ParentID;
         }
 
-        $this->Slug = URLSegmentFilter::create()->filter($this->Title);
+        $this->Slug = URLSegmentFilter::create()->filter(!empty($this->Slug) ? $this->Slug : $this->Title);
 
         parent::onBeforeWrite();
     }
