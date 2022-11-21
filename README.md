@@ -22,7 +22,7 @@ See read our [contributing](CONTRIBUTING.md) document for more information.
 We advise to use [Docker](https://docker.com)/[Docker compose](https://docs.docker.com/compose/) for development.\
 We also included a [Makefile](https://www.gnu.org/software/make/) to simplify some commands
 
-Our development container contains some build-in tools like `PHPCSFixer` and `yarn`.
+Our development container contains some built-in tools like `PHPCSFixer` and `yarn`.
 
 #### Getting development container up
 `make build` to build the Docker container and then run detached.\
