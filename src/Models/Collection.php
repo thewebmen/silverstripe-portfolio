@@ -23,30 +23,39 @@ use WeDevelop\Portfolio\Pages\CasePage;
  */
 class Collection extends DataObject
 {
+    /** @config */
     private static array $db = [
         'Title' => 'Varchar(255)',
     ];
 
+    /** @config */
     private static string $table_name = 'WeDevelop_Portfolio_Collection';
 
+    /** @config */
     private static string $singular_name = 'Collection';
 
+    /** @config */
     private static string $plural_name = 'Collections';
 
+    /** @config */
     private static string $icon_class = 'font-icon-rocket';
 
+    /** @config */
     private static array $summary_fields = [
         'Title',
     ];
 
+    /** @config */
     private static array $has_many = [
         'ElementPortfolios' => ElementPortfolio::class,
     ];
 
+    /** @config */
     private static array $many_many = [
         'CasePages' => CasePage::class,
     ];
 
+    /** @config */
     private static array $many_many_extraFields = [
         'CasePages' => [
             'CasesSort' => 'Int',
