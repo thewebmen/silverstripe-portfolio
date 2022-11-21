@@ -20,6 +20,9 @@
         "silverstripe/tagfield": "^2.7",
         "unclecheese/display-logic": "^2.0"
     },
+    "require-dev": {
+      "friendsofphp/php-cs-fixer": "^3.4"
+    },
     "extra": {
         "installer-name": "silverstripe-portfolio",
         "branch-alias": {
@@ -32,6 +35,13 @@
     "autoload": {
         "psr-4": {
             "WeDevelop\\Portfolio\\": "src/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": false,
+            "silverstripe/vendor-plugin": false,
+            "silverstripe/recipe-plugin": false
         }
     }
 }
