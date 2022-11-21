@@ -81,7 +81,8 @@ class CasePage extends \Page
                 _t('WeDevelop\Portfolio\Models\Customer.SINGULARNAME', 'Customer'),
                 Customer::get()->map()->toArray()
             )->setHasEmptyDefault(true),
-            UploadField::create('Thumbnail', _t(__CLASS__ . '.THUMBNAIL', 'Thumbnail')),
+            UploadField::create('Thumbnail', _t(__CLASS__ . '.THUMBNAIL', 'Thumbnail'))
+                ->setFolderName('Portfolio'),
         ]);
 
         return $fields;
