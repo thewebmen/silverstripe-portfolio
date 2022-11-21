@@ -9,8 +9,5 @@ interface FilterInterface
 {
     public function apply(array $items, DataList $dataList): DataList;
 
-    /**
-     * @return DataList|DataObject
-     */
-    public function getActiveItems(array $items);
+    public function getActiveItems(array $items): DataList|DataObject;
 }

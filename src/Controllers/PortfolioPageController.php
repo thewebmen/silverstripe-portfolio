@@ -14,7 +14,7 @@ use WeDevelop\Portfolio\Services\CaseFilterService;
  */
 class PortfolioPageController extends \PageController
 {
-    protected DataList $cases;
+    protected ?DataList $cases;
 
     public function getCategories(): ?DataList
     {
@@ -26,7 +26,7 @@ class PortfolioPageController extends \PageController
         return new CasesFilterForm($this);
     }
 
-    public function index()
+    public function index(): static
     {
         return $this;
     }
@@ -46,7 +46,7 @@ class PortfolioPageController extends \PageController
 
         $this->cases = $this->getCasesDataList();
 
-        if ($this->cases) {
+        if (!is_null($this->cases)) {
             $this->applyFilters();
         }
 

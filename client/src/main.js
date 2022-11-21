@@ -1,11 +1,11 @@
 window.addEventListener('DOMContentLoaded', () => {
-  const articleFilterForm = document.getElementById('WeDevelop_Portfolio_CasesFilterForm');
+  const casesFilterForm = document.getElementById('WeDevelop_Portfolio_CasesFilterForm');
 
-  articleFilterForm.addEventListener('submit', (e) => {
+  casesFilterForm.addEventListener('submit', (e) => {
     const { target } = e;
     const formData = {};
 
-    for (let i = 0; i < target.length; i++) {
+    for (let i = 0; i < target.length; i += 1) {
       const element = target.elements[i];
       let { name } = element;
 

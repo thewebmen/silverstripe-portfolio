@@ -6,15 +6,12 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldConfig_RecordViewer;
 use SilverStripe\Forms\HeaderField;
-use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 use SilverStripe\Forms\TextField;
 use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Assets\Image;
 use SilverStripe\ORM\HasManyList;
-use WeDevelop\Portfolio\ElementalGrid\ElementPortfolio;
 use WeDevelop\Portfolio\Pages\CasePage;
-use WeDevelop\Portfolio\Pages\PortfolioPage;
 
 /**
  * @property string $Title
@@ -27,18 +24,24 @@ use WeDevelop\Portfolio\Pages\PortfolioPage;
  */
 class Customer extends DataObject
 {
+    /** @config */
     private static string $table_name = 'WeDevelop_Portfolio_Customer';
 
+    /** @config */
     private static string $singular_name = 'Customer';
 
+    /** @config */
     private static string $plural_name = 'Customers';
 
+    /** @config */
     private static string $icon_class = 'font-icon-block-user';
 
+    /** @config */
     private static array $summary_fields = [
         'Title' => 'Name',
     ];
 
+    /** @config */
     private static array $db = [
         'Title' => 'Varchar(255)',
         'URL' => 'Varchar(255)',
@@ -47,14 +50,17 @@ class Customer extends DataObject
         'LinkedInURL' => 'Varchar(255)',
     ];
 
+    /** @config */
     private static array $has_one = [
         'Logo' => Image::class,
     ];
 
+    /** @config */
     private static array $owns = [
         'Logo',
     ];
 
+    /** @config */
     private static array $has_many = [
         'CasePages' => CasePage::class,
     ];

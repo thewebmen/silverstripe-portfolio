@@ -10,8 +10,6 @@ use SilverStripe\Forms\GridField\GridFieldConfig_RecordViewer;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\ManyManyList;
 use SilverStripe\View\Parsers\URLSegmentFilter;
-use TheWebmen\Articles\Controllers\ArticlesPageController;
-use TheWebmen\Articles\Pages\ArticleThemePage;
 use WeDevelop\Portfolio\Controllers\PortfolioPageController;
 use WeDevelop\Portfolio\Pages\CasePage;
 use WeDevelop\Portfolio\Pages\PortfolioPage;
@@ -25,27 +23,35 @@ use WeDevelop\Portfolio\Pages\PortfolioPage;
  */
 class Category extends DataObject
 {
+    /** @config */
     private static array $db = [
         'Title' => 'Varchar(255)',
         'Slug' => 'Varchar(255)',
     ];
 
+    /** @config */
     private static string $table_name = 'WeDevelop_Portfolio_Category';
 
+    /** @config */
     private static string $singular_name = 'Category';
 
+    /** @config */
     private static string $plural_name = 'Categories';
 
+    /** @config */
     private static string $icon_class = 'font-icon-rocket';
 
+    /** @config */
     private static array $summary_fields = [
         'Title' => 'Category name',
     ];
 
+    /** @config */
     private static array $has_one = [
         'PortfolioPage' => PortfolioPage::class,
     ];
 
+    /** @config */
     private static array $belongs_many_many = [
         'CasePages' => CasePage::class,
     ];
@@ -75,7 +81,7 @@ class Category extends DataObject
         $URLFilters = $controller->getFiltersFromURL();
         $categories = $URLFilters['categories'];
 
-        if (in_array($this->Slug, explode(',', $categories ?? ''))) {
+        if (in_array($this->Slug, explode(',', $categories ?? ''), true)) {
             return true;
         }
 

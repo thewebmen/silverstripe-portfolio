@@ -23,34 +23,43 @@ use WeDevelop\Portfolio\Pages\CasePage;
  */
 class Collection extends DataObject
 {
+    /** @config */
     private static array $db = [
         'Title' => 'Varchar(255)',
     ];
 
+    /** @config */
     private static string $table_name = 'WeDevelop_Portfolio_Collection';
 
+    /** @config */
     private static string $singular_name = 'Collection';
 
+    /** @config */
     private static string $plural_name = 'Collections';
 
+    /** @config */
     private static string $icon_class = 'font-icon-rocket';
 
+    /** @config */
     private static array $summary_fields = [
         'Title',
     ];
 
+    /** @config */
     private static array $has_many = [
         'ElementPortfolios' => ElementPortfolio::class,
     ];
 
+    /** @config */
     private static array $many_many = [
         'CasePages' => CasePage::class,
     ];
 
+    /** @config */
     private static array $many_many_extraFields = [
         'CasePages' => [
-            'CasesSort' => 'Int'
-        ]
+            'CasesSort' => 'Int',
+        ],
     ];
 
     public function getCMSFields(): FieldList
@@ -74,15 +83,15 @@ class Collection extends DataObject
 
         if ($this->exists()) {
             $fields->addFieldsToTab('Root.Main', [
-                GridField::create('CasePages', 'Cases', $this->CasePages(), $casesGridConfig)
+                GridField::create('CasePages', 'Cases', $this->CasePages(), $casesGridConfig),
             ]);
 
             $fields->addFieldsToTab('Root.Grid elements used on', [
-                GridField::create('ElementPortfolios', 'Grid elements', $this->ElementPortfolios(), $elementalGridConfig)
+                GridField::create('ElementPortfolios', 'Grid elements', $this->ElementPortfolios(), $elementalGridConfig),
             ]);
         } else {
             $fields->addFieldsToTab('Root.Main', [
-                new LiteralField('', 'Save the collection first, in order to be able to make changes to the contents of this collection.')
+                new LiteralField('', 'Save the collection first, in order to be able to make changes to the contents of this collection.'),
             ]);
         }
 

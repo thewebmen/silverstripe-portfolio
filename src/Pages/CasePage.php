@@ -25,67 +25,80 @@ use WeDevelop\Portfolio\Models\Customer;
  */
 class CasePage extends \Page
 {
+    /** @config */
     private static string $table_name = 'WeDevelop_Portfolio_CasePage';
 
-    private static string $singular_name = 'Case page';
+    /** @config */
+    private static string $singular_name = 'Portfolio - case page';
 
+    /** @config */
+    private static string $plural_name = 'Portfolio - case pages';
+
+    /** @config */
     private static string $description = 'A page that represents a portfolio case';
 
-    private static string $plural_name = 'Cases page';
+    /** @config */
+    private static string $icon_class = 'font-icon-block-banner';
 
-    private static string $icon_class = 'font-icon-p-article';
-
+    /** @config */
     private static array $allowed_children = [];
 
+    /** @config */
     private static bool $show_in_sitetree = false;
 
+    /** @config */
     private static bool $can_be_root = false;
 
+    /** @config */
     private static array $db = [
         'PublicationDate' => 'Datetime',
     ];
 
+    /** @config */
     private static array $has_one = [
         'Thumbnail' => Image::class,
         'Customer' => Customer::class,
     ];
 
+    /** @config */
     private static array $owns = [
         'Thumbnail',
     ];
 
+    /** @config */
     private static array $many_many = [
         'Categories' => Category::class,
     ];
 
+    /** @config */
     private static array $belongs_many_many = [
         'Collections' => Collection::class,
         'ElementPortfolios' => ElementPortfolio::class,
     ];
 
+    /** @config */
     private static string $default_sort = 'PublicationDate DESC';
 
     public function getCMSFields(): FieldList
     {
-        $fields = parent::getCMSFields();
+        $this->beforeUpdateCMSFields(function (FieldList $fields) {
+            $fields->addFieldsToTab('Root.ProjectSettings', [
+                TagField::create(
+                    'Categories',
+                    _t('WeDevelop\Portfolio\Models\Category.PLURALNAME', 'Categories'),
+                    Category::get()->filter('PortfolioPageID', $this->ParentID),
+                    $this->Categories(),
+                )->setCanCreate(false),
+                DropdownField::create(
+                    'CustomerID',
+                    _t('WeDevelop\Portfolio\Models\Customer.SINGULARNAME', 'Customer'),
+                    Customer::get()->map()->toArray()
+                )->setHasEmptyDefault(true),
+                UploadField::create('Thumbnail', _t(__CLASS__ . '.THUMBNAIL', 'Thumbnail')),
+            ]);
+        });
 
-        $fields->addFieldsToTab('Root.ProjectSettings', [
-            TagField::create(
-                'Categories',
-                _t('WeDevelop\Portfolio\Models\Category.PLURALNAME', 'Categories'),
-                Category::get()->filter('PortfolioPageID', $this->ParentID),
-                $this->Categories(),
-            )->setCanCreate(false),
-            DropdownField::create(
-                'CustomerID',
-                _t('WeDevelop\Portfolio\Models\Customer.SINGULARNAME', 'Customer'),
-                Customer::get()->map()->toArray()
-            )->setHasEmptyDefault(true),
-            UploadField::create('Thumbnail', _t(__CLASS__ . '.THUMBNAIL', 'Thumbnail'))
-                ->setFolderName('Portfolio'),
-        ]);
-
-        return $fields;
+        return parent::getCMSFields();
     }
 
     public function getControllerName(): string

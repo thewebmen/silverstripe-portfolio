@@ -20,7 +20,6 @@ use SilverStripe\Forms\TreeDropdownField;
 use SilverStripe\ORM\DataList;
 use SilverStripe\ORM\HasManyList;
 use SilverStripe\Versioned\GridFieldArchiveAction;
-use SilverStripe\VersionedAdmin\Extensions\ArchiveRestoreAction;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 use UncleCheese\DisplayLogic\Forms\Wrapper;
 use WeDevelop\Portfolio\Models\Collection;
@@ -38,20 +37,26 @@ use WeDevelop\Portfolio\Pages\PortfolioPage;
  */
 class ElementPortfolio extends BaseElement
 {
+    /** @config */
     private static string $table_name = 'Element_Portfolio';
 
-    private static string $singular_name = 'Portfolio';
+    /** @config */
+    private static string $singular_name = 'Portfolio - Overview';
 
-    private static string $plural_name = 'Portfolios';
+    /** @config */
+    private static string $plural_name = 'Portfolio - Overview elements';
 
-    private static string $description = 'Show a collection of a portfolio in a grid element';
+    /** @config */
+    private static string $description = 'Show an overview of a portfolio in a grid element';
 
-    private static string $icon = 'font-icon-p-list';
+    /** @config */
+    private static string $icon = 'font-icon-book-open';
 
     private const MODE_CUSTOM = 'custom';
 
     private const MODE_COLLECTION = 'collection';
 
+    /** @config */
     private static array $db = [
         'Content' => 'HTMLText',
         'ShowMoreCasesButton' => 'Boolean',
@@ -60,21 +65,25 @@ class ElementPortfolio extends BaseElement
         'Mode' => 'Varchar(255)',
     ];
 
+    /** @config */
     private static array $has_one = [
         'Collection' => Collection::class,
         'PortfolioPage' => PortfolioPage::class,
     ];
 
+    /** @config */
     private static array $many_many = [
         'CasePages' => CasePage::class,
     ];
 
+    /** @config */
     private static array $many_many_extraFields = [
         'CasePages' => [
-            'CasesSort' => 'Int'
-        ]
+            'CasesSort' => 'Int',
+        ],
     ];
 
+    /** @config */
     private static array $defaults = [
         'MaxAmount' => 10,
     ];
@@ -117,7 +126,7 @@ class ElementPortfolio extends BaseElement
                         Wrapper::create([
                             GridField::create('CasePages', 'Cases', $this->CasePages(), $gridConfig)->addExtraClass('mt-5'),
                         ])->displayIf('Mode')->isEqualTo(self::MODE_CUSTOM)->end(),
-                        HeaderField::create('Show more button')->setHeadingLevel(1)->addExtraClass('mt-5'),
+                        HeaderField::create('ShowMoreButton', _t(__CLASS__ . '.SHOWMOREBUTTON', "Show 'more cases' button"))->setHeadingLevel(2)->addExtraClass('mt-5'),
                         CheckboxField::create(
                             'ShowMoreCasesButton',
                             _t(__CLASS__ . '.SHOWMOREBUTTON', "Show 'more cases' button")
@@ -127,7 +136,7 @@ class ElementPortfolio extends BaseElement
                                 'ShowMoreCasesButtonText',
                                 _t(__CLASS__ . '.MOREBUTTONTEXT', "'More cases' button text")
                             ),
-                            TreeDropdownField::create('PortfolioPageID', 'Portfolio page', SiteTree::class)
+                            TreeDropdownField::create('PortfolioPageID', 'Portfolio page', SiteTree::class),
                         ])->displayIf('ShowMoreCasesButton')->isChecked()->end(),
                         NumericField::create(
                             'MaxAmount',
@@ -137,7 +146,7 @@ class ElementPortfolio extends BaseElement
                 );
             } else {
                 $fields->addFieldsToTab('Root.Main', [
-                    new LiteralField('', 'Save the element first, in order to be able to make changes to the contents of this collection.')
+                    new LiteralField('', 'Save the element first, in order to be able to make changes to the contents of this collection.'),
                 ]);
             }
         });

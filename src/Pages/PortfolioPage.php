@@ -24,62 +24,71 @@ use WeDevelop\Portfolio\Models\Customer;
  */
 class PortfolioPage extends \Page
 {
-    /**
-     * @var string
-     */
+    /** @config */
     private static string $table_name = 'WeDevelop_Portfolio_PortfolioPage';
 
-    private static string $singular_name = 'Portfolio page';
+    /** @config */
+    private static string $singular_name = 'Portfolio - overview page';
 
-    private static string $plural_name = 'Portfolio pages';
+    /** @config */
+    private static string $plural_name = 'Portfolio - overview pages';
 
-    private static string $icon_class = 'font-icon-p-article';
+    /** @config */
+    private static string $description = 'A page with an overview of all cases in a portfolio';
 
+    /** @config */
+    private static string $icon_class = 'font-icon-page-multiple';
+
+    /** @config */
     private static array $allowed_children = [
         '*' . CasePage::class,
     ];
 
+    /** @config */
     private static string $default_child = CasePage::class;
 
+    /** @config */
     private static array $db = [
-        'PageLength' => 'Int'
+        'PageLength' => 'Int',
     ];
 
+    /** @config */
     private static array $defaults = [
-        'PageLength' => 10
+        'PageLength' => 10,
     ];
 
+    /** @config */
     private static array $has_many = [
         'Categories' => Category::class,
     ];
 
     public function getCMSFields(): FieldList
     {
-        $fields = parent::getCMSFields();
+        $this->beforeUpdateCMSFields(function (FieldList $fields) {
+            $fields->addFieldsToTab(
+                'Root.Categories',
+                [
+                    GridField::create(
+                        'Categories',
+                        _t('WeDevelop\Portfolio\Models\Category.PLURALNAME', 'Categories'),
+                        $this->Categories(),
+                        new GridFieldConfig_RecordEditor()
+                    ),
+                ]
+            );
 
-        $fields->addFieldsToTab(
-            'Root.Categories',
-            [
-                GridField::create(
-                    'Categories',
-                    _t('WeDevelop\Portfolio\Models\Category.PLURALNAME', 'Categories'),
-                    $this->Categories(),
-                    new GridFieldConfig_RecordEditor())
-            ]
-        );
+            $fields->replaceField(
+                'ChildPages',
+                $this->createGridField(
+                    _t(__CLASS__ . '.CASES', 'Cases'),
+                    CasePage::get()->filter('ParentID', $this->ID)
+                )
+            );
 
-        $fields->replaceField(
-            'ChildPages',
-            $this->createGridField(
-                'Cases',
-                _t(__CLASS__ . '.CASES', 'Cases'),
-                CasePage::get()->filter('ParentID', $this->ID)
-            )
-        );
+            $fields->insertBefore('Cases', NumericField::create('PageLength', 'Items per page'));
+        });
 
-        $fields->insertBefore('Cases', NumericField::create('PageLength', 'Items per page'));
-
-        return $fields;
+        return parent::getCMSFields();
     }
 
     public function getLumberjackTitle(): string
@@ -87,13 +96,13 @@ class PortfolioPage extends \Page
         return _t(__CLASS__ . '.CASES', 'Cases');
     }
 
-    private function createGridField(string $type, string $title, DataList $list): GridField
+    private function createGridField(string $title, DataList $list): GridField
     {
         $config = GridFieldConfig_Lumberjack::create()
             ->removeComponentsByType(GridFieldSiteTreeAddNewButton::class)
             ->addComponent(new GridFieldAddNewSiteTreeItemButton('buttons-before-left'));
 
-        return GridField::create($type, $title, $list, $config);
+        return GridField::create('Cases', $title, $list, $config);
     }
 
     public function getTitle(): string
@@ -112,7 +121,7 @@ class PortfolioPage extends \Page
     {
         return Category::get()->filter(
             [
-                'PortfolioPageID' => $this->ID
+                'PortfolioPageID' => $this->ID,
             ]
         );
     }
