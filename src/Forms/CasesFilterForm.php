@@ -53,7 +53,7 @@ class CasesFilterForm extends Form
      */
     public function forTemplate()
     {
-        Requirements::javascript('wedevelop/silverstripe-portfolio:client/dist/main.js');
+        Requirements::javascript('wedevelopnl/silverstripe-portfolio:client/dist/main.js');
 
         return parent::forTemplate();
     }

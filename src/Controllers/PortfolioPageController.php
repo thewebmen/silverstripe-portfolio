@@ -2,7 +2,6 @@
 
 namespace WeDevelop\Portfolio\Controllers;
 
-use JetBrains\PhpStorm\ArrayShape;
 use SilverStripe\ORM\DataList;
 use SilverStripe\ORM\PaginatedList;
 use WeDevelop\Portfolio\Forms\CasesFilterForm;
@@ -92,7 +91,6 @@ class PortfolioPageController extends \PageController
         return (bool)$URLFilters['categories'];
     }
 
-    #[ArrayShape(['categories' => "mixed|null"])]
     public function getFiltersFromURL(): array
     {
         return [

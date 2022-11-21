@@ -1,5 +1,5 @@
 {
-  "name": "silverstripe-portfolio",
+  "name": "@wedevelopnl/silverstripe-portfolio",
   "scripts": {
     "build": "NODE_ENV=prod webpack",
     "watch": "NODE_ENV=dev webpack --watch",

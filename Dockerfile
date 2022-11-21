@@ -5,10 +5,7 @@ ARG NODE_VERSION=18.12.1
 FROM node:$NODE_VERSION-alpine$ALPINE_VERSION AS node
 FROM php:8.1-cli-alpine$ALPINE_VERSION AS php-cli
 
-RUN apk update && apk upgrade\
-   wget
-
-RUN apk add php yarn make perl --update
+RUN apk add php yarn make perl --no-cache
 
 WORKDIR /app
 
