@@ -8,7 +8,7 @@ FROM php:8.1-cli-alpine$ALPINE_VERSION AS php-cli
 RUN apk update && apk upgrade\
    wget
 
-RUN apk add php yarn make --update
+RUN apk add php yarn make perl --update
 
 WORKDIR /app
 
