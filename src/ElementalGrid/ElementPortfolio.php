@@ -39,11 +39,11 @@ class ElementPortfolio extends BaseElement
 {
     private static string $table_name = 'Element_Portfolio';
 
-    private static string $singular_name = 'Portfolio';
+    private static string $singular_name = 'Portfolio - Overview';
 
-    private static string $plural_name = 'Portfolios';
+    private static string $plural_name = 'Portfolio - Overview elements';
 
-    private static string $description = 'Show a collection of a portfolio in a grid element';
+    private static string $description = 'Show an overview of a portfolio in a grid element';
 
     private static string $icon = 'font-icon-p-list';
 
