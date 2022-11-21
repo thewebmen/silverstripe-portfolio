@@ -1,35 +1,35 @@
 nl:
   WeDevelop\Portfolio\Pages\CasePage:
-    PLURALNAME: 'Cases'
+    SINGULARNAME: 'Portfolio - case pagina'
+    PLURALNAME: 'Portfolio - case pagina''s'
     PLURALS:
       one: 'Een case'
       other: '{count} cases'
-    SINGULARNAME: 'Case'
     THUMBNAIL: 'Voorvertoning'
     PUBLICATIONDATE: 'Publicatiedatum'
   WeDevelop\Portfolio\Pages\PortfolioPage:
-    PLURALNAME: 'Case overzicht paginas'
+    SINGULARNAME: 'Portfolio - overzicht pagina'
+    PLURALNAME: 'Portfolio - overzicht pagina''s'
     PLURALS:
       one: 'Een case overzicht pagina'
       other: '{count} case overzicht paginas'
-    SINGULARNAME: 'Case overzicht pagina'
     CASES: 'Cases'
     db_PageLength: 'Pagina lengte'
     NOCASESFOUND: 'Geen cases gevonden'
   WeDevelop\Portfolio\Extensions:
     has_many_Cases: 'Cases'
   WeDevelop\Portfolio\Models\Customer:
+    SINGULARNAME: 'Klant'
     PLURALNAME: 'Klanten'
     PLURALS:
       one: 'Een klant'
       other: '{count} klanten'
-    SINGULARNAME: 'Klant'
   WeDevelop\Portfolio\Models\Category:
+    SINGULARNAME: 'Categorie'
     PLURALNAME: 'Categorieën'
     PLURALS:
       one: 'Een categorie'
       other: '{count} categorieën'
-    SINGULARNAME: 'Categorie'
     NAME: 'Naam'
   WeDevelop\Portfolio\ElementalGrid\ElementPortfolio:
     RESULTS: 'Resultaten'

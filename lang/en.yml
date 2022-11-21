@@ -1,29 +1,29 @@
 en:
   WeDevelop\Portfolio\Pages\CasePage:
-    PLURALNAME: 'Cases'
+    SINGULARNAME: 'Portfolio - case page'
+    PLURALNAME: 'Portfolio - case pages'
     PLURALS:
       one: 'A case'
       other: '{count} cases'
-    SINGULARNAME: 'Case'
   WeDevelop\Portfolio\Pages\PortfolioPage:
-    PLURALNAME: 'Case overview pages'
+    SINGULARNAME: 'Portfolio - overview page'
+    PLURALNAME: 'Portfolio - overview pages'
     PLURALS:
       one: 'A case overview page'
       other: '{count} case overview pages'
-    SINGULARNAME: 'Case overview page'
     CASES: 'Cases'
     db_PageLength: 'Page length'
   WeDevelop\Portfolio\Extensions:
-    has_many_Articles: 'Cases'
+    has_many_Cases: 'Cases'
   WeDevelop\Portfolio\Models\Customer:
+    SINGULARNAME: 'Customer'
     PLURALNAME: 'Customers'
     PLURALS:
       one: 'A customer'
       other: '{count} customers'
-    SINGULARNAME: 'Customer'
   WeDevelop\Portfolio\Models\Category:
+    SINGULARNAME: 'Category'
     PLURALNAME: 'Categories'
     PLURALS:
       one: 'A category'
       other: '{count} categories'
-    SINGULARNAME: 'Category'

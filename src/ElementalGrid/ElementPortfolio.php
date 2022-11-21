@@ -45,7 +45,7 @@ class ElementPortfolio extends BaseElement
 
     private static string $description = 'Show an overview of a portfolio in a grid element';
 
-    private static string $icon = 'font-icon-p-list';
+    private static string $icon = 'font-icon-book-open';
 
     private const MODE_CUSTOM = 'custom';
 
@@ -116,7 +116,7 @@ class ElementPortfolio extends BaseElement
                         Wrapper::create([
                             GridField::create('CasePages', 'Cases', $this->CasePages(), $gridConfig)->addExtraClass('mt-5'),
                         ])->displayIf('Mode')->isEqualTo(self::MODE_CUSTOM)->end(),
-                        HeaderField::create('Show more button')->setHeadingLevel(1)->addExtraClass('mt-5'),
+                        HeaderField::create('ShowMoreButton', _t(__CLASS__ . '.SHOWMOREBUTTON', "Show 'more cases' button"))->setHeadingLevel(2)->addExtraClass('mt-5'),
                         CheckboxField::create(
                             'ShowMoreCasesButton',
                             _t(__CLASS__ . '.SHOWMOREBUTTON', "Show 'more cases' button")

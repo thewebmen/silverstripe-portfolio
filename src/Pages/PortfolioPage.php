@@ -29,11 +29,11 @@ class PortfolioPage extends \Page
      */
     private static string $table_name = 'WeDevelop_Portfolio_PortfolioPage';
 
-    private static string $singular_name = 'Portfolio - Overview page';
+    private static string $singular_name = 'Portfolio - overview page';
 
-    private static string $plural_name = 'Portfolio - Overview pages';
+    private static string $plural_name = 'Portfolio - overview pages';
 
-    private static string $icon_class = 'font-icon-p-article';
+    private static string $icon_class = 'font-icon-page-multiple';
 
     private static array $allowed_children = [
         '*' . CasePage::class,

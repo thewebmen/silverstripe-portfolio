@@ -27,14 +27,13 @@ class CasePage extends \Page
 {
     private static string $table_name = 'WeDevelop_Portfolio_CasePage';
 
-    private static string $singular_name = 'Portfolio - Case detail page';
+    private static string $singular_name = 'Portfolio - case page';
 
-    private static string $plural_name = 'Portfolio - Case detail pages';
+    private static string $plural_name = 'Portfolio - case pages';
 
     private static string $description = 'A page that represents a portfolio case';
 
-
-    private static string $icon_class = 'font-icon-p-article';
+    private static string $icon_class = 'font-icon-block-banner';
 
     private static array $allowed_children = [];
 
