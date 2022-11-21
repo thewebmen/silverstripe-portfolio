@@ -6,15 +6,12 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldConfig_RecordViewer;
 use SilverStripe\Forms\HeaderField;
-use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 use SilverStripe\Forms\TextField;
 use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Assets\Image;
 use SilverStripe\ORM\HasManyList;
-use WeDevelop\Portfolio\ElementalGrid\ElementPortfolio;
 use WeDevelop\Portfolio\Pages\CasePage;
-use WeDevelop\Portfolio\Pages\PortfolioPage;
 
 /**
  * @property string $Title

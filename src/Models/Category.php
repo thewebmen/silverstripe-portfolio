@@ -10,8 +10,6 @@ use SilverStripe\Forms\GridField\GridFieldConfig_RecordViewer;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\ManyManyList;
 use SilverStripe\View\Parsers\URLSegmentFilter;
-use TheWebmen\Articles\Controllers\ArticlesPageController;
-use TheWebmen\Articles\Pages\ArticleThemePage;
 use WeDevelop\Portfolio\Controllers\PortfolioPageController;
 use WeDevelop\Portfolio\Pages\CasePage;
 use WeDevelop\Portfolio\Pages\PortfolioPage;
@@ -75,7 +73,7 @@ class Category extends DataObject
         $URLFilters = $controller->getFiltersFromURL();
         $categories = $URLFilters['categories'];
 
-        if (in_array($this->Slug, explode(',', $categories ?? ''))) {
+        if (in_array($this->Slug, explode(',', $categories ?? ''), true)) {
             return true;
         }
 

@@ -42,11 +42,11 @@ class PortfolioPage extends \Page
     private static string $default_child = CasePage::class;
 
     private static array $db = [
-        'PageLength' => 'Int'
+        'PageLength' => 'Int',
     ];
 
     private static array $defaults = [
-        'PageLength' => 10
+        'PageLength' => 10,
     ];
 
     private static array $has_many = [
@@ -64,7 +64,8 @@ class PortfolioPage extends \Page
                     'Categories',
                     _t('WeDevelop\Portfolio\Models\Category.PLURALNAME', 'Categories'),
                     $this->Categories(),
-                    new GridFieldConfig_RecordEditor())
+                    new GridFieldConfig_RecordEditor()
+                ),
             ]
         );
 
@@ -112,7 +113,7 @@ class PortfolioPage extends \Page
     {
         return Category::get()->filter(
             [
-                'PortfolioPageID' => $this->ID
+                'PortfolioPageID' => $this->ID,
             ]
         );
     }

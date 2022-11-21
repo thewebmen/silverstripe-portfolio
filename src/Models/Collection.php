@@ -49,8 +49,8 @@ class Collection extends DataObject
 
     private static array $many_many_extraFields = [
         'CasePages' => [
-            'CasesSort' => 'Int'
-        ]
+            'CasesSort' => 'Int',
+        ],
     ];
 
     public function getCMSFields(): FieldList
@@ -74,15 +74,15 @@ class Collection extends DataObject
 
         if ($this->exists()) {
             $fields->addFieldsToTab('Root.Main', [
-                GridField::create('CasePages', 'Cases', $this->CasePages(), $casesGridConfig)
+                GridField::create('CasePages', 'Cases', $this->CasePages(), $casesGridConfig),
             ]);
 
             $fields->addFieldsToTab('Root.Grid elements used on', [
-                GridField::create('ElementPortfolios', 'Grid elements', $this->ElementPortfolios(), $elementalGridConfig)
+                GridField::create('ElementPortfolios', 'Grid elements', $this->ElementPortfolios(), $elementalGridConfig),
             ]);
         } else {
             $fields->addFieldsToTab('Root.Main', [
-                new LiteralField('', 'Save the collection first, in order to be able to make changes to the contents of this collection.')
+                new LiteralField('', 'Save the collection first, in order to be able to make changes to the contents of this collection.'),
             ]);
         }
 

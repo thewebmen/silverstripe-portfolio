@@ -11,7 +11,8 @@ final class CaseFilterService
 {
     public function __construct(
         private DataList $cases
-    ) {}
+    ) {
+    }
 
     public function applyCategoryFilter(array $categories): void
     {

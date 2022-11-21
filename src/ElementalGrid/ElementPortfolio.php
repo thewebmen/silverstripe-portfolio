@@ -20,7 +20,6 @@ use SilverStripe\Forms\TreeDropdownField;
 use SilverStripe\ORM\DataList;
 use SilverStripe\ORM\HasManyList;
 use SilverStripe\Versioned\GridFieldArchiveAction;
-use SilverStripe\VersionedAdmin\Extensions\ArchiveRestoreAction;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 use UncleCheese\DisplayLogic\Forms\Wrapper;
 use WeDevelop\Portfolio\Models\Collection;
@@ -71,8 +70,8 @@ class ElementPortfolio extends BaseElement
 
     private static array $many_many_extraFields = [
         'CasePages' => [
-            'CasesSort' => 'Int'
-        ]
+            'CasesSort' => 'Int',
+        ],
     ];
 
     private static array $defaults = [
@@ -127,7 +126,7 @@ class ElementPortfolio extends BaseElement
                                 'ShowMoreCasesButtonText',
                                 _t(__CLASS__ . '.MOREBUTTONTEXT', "'More cases' button text")
                             ),
-                            TreeDropdownField::create('PortfolioPageID', 'Portfolio page', SiteTree::class)
+                            TreeDropdownField::create('PortfolioPageID', 'Portfolio page', SiteTree::class),
                         ])->displayIf('ShowMoreCasesButton')->isChecked()->end(),
                         NumericField::create(
                             'MaxAmount',
@@ -137,7 +136,7 @@ class ElementPortfolio extends BaseElement
                 );
             } else {
                 $fields->addFieldsToTab('Root.Main', [
-                    new LiteralField('', 'Save the element first, in order to be able to make changes to the contents of this collection.')
+                    new LiteralField('', 'Save the element first, in order to be able to make changes to the contents of this collection.'),
                 ]);
             }
         });
