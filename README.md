@@ -3,10 +3,10 @@ This module adds functionality to create and manage a portfolio (page) that incl
 You can also link customers/categories to cases and create a collection with different cases.
 
 ## Requirements
-* SilverStripe 4.x
+* See `composer.json` requirements
 
 ## Installation
-* `composer require wedevelop/silverstripe-portfolio`
+* `composer require wedevelopnl/silverstripe-portfolio`
 
 ## License
 See [License](LICENSE)
