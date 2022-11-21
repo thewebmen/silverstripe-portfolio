@@ -3,10 +3,10 @@ set -e
 
 # first arg is `-f` or `--some-option`
 if [ "${1#-}" != "$1" ]; then
-    set -- php-cli "$@"
+    set -- php "$@"
 fi
 
-if [ "$1" = 'php-cli' ]; then
+if [ "$1" = 'php' ]; then
     composer install --prefer-dist --no-progress --no-suggest --no-interaction --no-plugins --ignore-platform-reqs
 fi
 
