@@ -2,7 +2,8 @@
   "name": "silverstripe-portfolio",
   "scripts": {
     "build": "NODE_ENV=prod webpack",
-    "watch": "NODE_ENV=dev webpack --watch"
+    "watch": "NODE_ENV=dev webpack --watch",
+    "lint": "yarn run eslint"
   },
   "keywords": [],
   "author": "WeDevelop",

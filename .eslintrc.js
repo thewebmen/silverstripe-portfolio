@@ -14,10 +14,6 @@ module.exports = {
     '.eslintrc.js',
     '**/*.config.js',
     '**/vendor/*.js',
-    '**/themes/default/src/javascript/cxsform.js',
-    '**/themes/default/src/javascript/script.js',
-    '**/themes/default/src/javascript/markerclusterer.js',
-    '**/dist/**/*.js'
   ],
   rules: {
     'no-new': 0,
