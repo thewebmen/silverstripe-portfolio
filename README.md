@@ -33,7 +33,7 @@ You can SSH into the container using `make sh`.
 #### Front-end
 Webpack and yarn are used to compile front-end assets.
 
-If you use the Docker environment, you can just run `make watch` to watch for changes or run `make build` to build assets (minified and production ready!)
+If you use the Docker environment, you can just run `make yarn-watch` to watch for changes or run `make yarn-build` to build assets (minified and production ready!)
 
 #### All make commands
 You can run `make help` to get a list with all available `make` commands.

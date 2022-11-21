@@ -36,5 +36,5 @@ sh: ##@develop Open shell in container
 yarn-watch: ##@yarn Watch for changes in front-end files
 	${docker} yarn run watch
 
-yarn-build: ##@yarn Watch for changes in front-end files
-	${docker} yarn run watch
+yarn-build: ##@yarn Build production assets
+	${docker} yarn run build
