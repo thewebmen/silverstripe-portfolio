@@ -37,20 +37,26 @@ use WeDevelop\Portfolio\Pages\PortfolioPage;
  */
 class ElementPortfolio extends BaseElement
 {
+    /** @config */
     private static string $table_name = 'Element_Portfolio';
 
+    /** @config */
     private static string $singular_name = 'Portfolio - Overview';
 
+    /** @config */
     private static string $plural_name = 'Portfolio - Overview elements';
 
+    /** @config */
     private static string $description = 'Show an overview of a portfolio in a grid element';
 
+    /** @config */
     private static string $icon = 'font-icon-book-open';
 
     private const MODE_CUSTOM = 'custom';
 
     private const MODE_COLLECTION = 'collection';
 
+    /** @config */
     private static array $db = [
         'Content' => 'HTMLText',
         'ShowMoreCasesButton' => 'Boolean',
@@ -59,21 +65,25 @@ class ElementPortfolio extends BaseElement
         'Mode' => 'Varchar(255)',
     ];
 
+    /** @config */
     private static array $has_one = [
         'Collection' => Collection::class,
         'PortfolioPage' => PortfolioPage::class,
     ];
 
+    /** @config */
     private static array $many_many = [
         'CasePages' => CasePage::class,
     ];
 
+    /** @config */
     private static array $many_many_extraFields = [
         'CasePages' => [
             'CasesSort' => 'Int',
         ],
     ];
 
+    /** @config */
     private static array $defaults = [
         'MaxAmount' => 10,
     ];

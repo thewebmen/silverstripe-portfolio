@@ -23,27 +23,35 @@ use WeDevelop\Portfolio\Pages\PortfolioPage;
  */
 class Category extends DataObject
 {
+    /** @config */
     private static array $db = [
         'Title' => 'Varchar(255)',
         'Slug' => 'Varchar(255)',
     ];
 
+    /** @config */
     private static string $table_name = 'WeDevelop_Portfolio_Category';
 
+    /** @config */
     private static string $singular_name = 'Category';
 
+    /** @config */
     private static string $plural_name = 'Categories';
 
+    /** @config */
     private static string $icon_class = 'font-icon-rocket';
 
+    /** @config */
     private static array $summary_fields = [
         'Title' => 'Category name',
     ];
 
+    /** @config */
     private static array $has_one = [
         'PortfolioPage' => PortfolioPage::class,
     ];
 
+    /** @config */
     private static array $belongs_many_many = [
         'CasePages' => CasePage::class,
     ];
