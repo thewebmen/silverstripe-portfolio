@@ -12,7 +12,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": ">=8.0",
+        "php": ">=8.1",
         "silverstripe/cms": "^4@stable",
         "silverstripe/vendor-plugin": "^1.0",
         "silverstripe/lumberjack": "^2.0",

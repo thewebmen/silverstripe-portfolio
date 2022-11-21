@@ -5,7 +5,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const { target } = e;
     const formData = {};
 
-    for (let i = 0; i < target.length; i++) {
+    for (let i = 0; i < target.length; i += 1) {
       const element = target.elements[i];
       let { name } = element;
 
