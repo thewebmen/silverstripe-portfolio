@@ -34,6 +34,9 @@ class PortfolioPage extends \Page
     private static string $plural_name = 'Portfolio - overview pages';
 
     /** @config */
+    private static string $description = 'A page with an overview of all cases in a portfolio';
+
+    /** @config */
     private static string $icon_class = 'font-icon-page-multiple';
 
     /** @config */

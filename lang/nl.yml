@@ -7,6 +7,7 @@ nl:
       other: '{count} cases'
     THUMBNAIL: 'Voorvertoning'
     PUBLICATIONDATE: 'Publicatiedatum'
+    DESCRIPTION: 'Een pagina met een portfolio case'
   WeDevelop\Portfolio\Pages\PortfolioPage:
     SINGULARNAME: 'Portfolio - overzicht pagina'
     PLURALNAME: 'Portfolio - overzicht pagina''s'
@@ -16,6 +17,7 @@ nl:
     CASES: 'Cases'
     db_PageLength: 'Pagina lengte'
     NOCASESFOUND: 'Geen cases gevonden'
+    DESCRIPTION: 'Een pagina met het overzicht van alle cases binnen een portfolio'
   WeDevelop\Portfolio\Extensions:
     has_many_Cases: 'Cases'
   WeDevelop\Portfolio\Models\Customer:
