@@ -12,7 +12,7 @@ You can also link customers/categories to cases and create a collection with dif
 See [License](LICENSE)
 
 ## Maintainers
-* [WeDevelop](https://www.wedevelop.nl/) <developement@wedevelop.nl>
+* [WeDevelop](https://www.wedevelop.nl/) <development@wedevelop.nl>
 
 ## Development and contribution
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
