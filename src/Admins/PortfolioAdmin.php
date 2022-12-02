@@ -5,6 +5,7 @@ namespace WeDevelop\Portfolio\Admins;
 use SilverStripe\Admin\ModelAdmin;
 use WeDevelop\Portfolio\Models\Collection;
 use WeDevelop\Portfolio\Models\Customer;
+use WeDevelop\Portfolio\Config;
 
 class PortfolioAdmin extends ModelAdmin
 {
@@ -22,4 +23,15 @@ class PortfolioAdmin extends ModelAdmin
         Customer::class,
         Collection::class,
     ];
+
+    public function getManagedModels()
+    {
+        $models = parent::getManagedModels();
+
+        if (!Config::isCustomerEnabled()) {
+            unset($models[Customer::class]);
+        }
+
+        return $models;
+    }
 }

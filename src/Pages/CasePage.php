@@ -14,6 +14,7 @@ use WeDevelop\Portfolio\ElementalGrid\ElementPortfolio;
 use WeDevelop\Portfolio\Models\Category;
 use WeDevelop\Portfolio\Models\Collection;
 use WeDevelop\Portfolio\Models\Customer;
+use WeDevelop\Portfolio\Config;
 
 /**
  * @property DBDatetime $PublicationDate
@@ -96,6 +97,10 @@ class CasePage extends \Page
                 )->setHasEmptyDefault(true),
                 UploadField::create('Thumbnail', _t(__CLASS__ . '.THUMBNAIL', 'Thumbnail')),
             ]);
+
+            if (!Config::isCustomerEnabled()) {
+                $fields->removeByName('CustomerID');
+            }
         });
 
         return parent::getCMSFields();

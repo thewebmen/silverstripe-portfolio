@@ -8,6 +8,20 @@ You can also link customers/categories to cases and create a collection with dif
 ## Installation
 * `composer require wedevelopnl/silverstripe-portfolio`
 
+## Feature Flags
+
+### Customers
+Managing and linking customers can be disabled using the following config in your project
+
+```
+---
+Name: flags
+After: portfolio
+---
+WeDevelop\Portfolio\Config:
+  customer_enabled: false
+```
+
 ## License
 See [License](LICENSE)
 

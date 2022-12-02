@@ -8,7 +8,7 @@
                 <li>$PublicationDate.Nice</li>
             <% end_if %>
         </ul>
-        <% if $Customer %>
+        <% if $Customer && $WeDevelopPortfolioConfigIsCustomerEnabled %>
             <span>$Customer.Title</span><br/>
         <% end_if %>
         <hr />
