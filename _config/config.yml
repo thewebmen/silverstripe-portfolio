@@ -4,3 +4,6 @@ Name: portfolio
 WeDevelop\Portfolio\Pages\PortfolioPage:
   extensions:
     - SilverStripe\Lumberjack\Model\LumberJack
+
+WeDevelop\Portfolio\Config:
+  customer_enabled: true
