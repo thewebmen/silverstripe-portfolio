@@ -21,7 +21,7 @@ RUN rm -rf node_modules
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 COPY composer.json ./
 ENV COMPOSER_ALLOW_SUPERUSER 1
-RUN composer install --prefer-dist --no-progress --no-suggest --no-interaction --no-plugins --ignore-platform-reqs
+RUN composer install --prefer-dist --no-progress --no-interaction --no-plugins --ignore-platform-reqs
 
 COPY dev/docker/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 RUN chmod +x /usr/local/bin/docker-entrypoint
