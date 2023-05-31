@@ -6,7 +6,9 @@ You can also link customers/categories to cases and create a collection with dif
 * See `composer.json` requirements
 
 ## Installation
-* `composer require wedevelopnl/silverstripe-portfolio`
+```
+composer require wedevelopnl/silverstripe-portfolio
+```
 
 ## Feature Flags
 
