@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace WeDevelop\Portfolio\Models;
 
 use SilverStripe\Forms\FieldList;
@@ -64,37 +66,37 @@ class Collection extends DataObject
 
     public function getCMSFields(): FieldList
     {
-        $fields = parent::getCMSFields();
+        $this->beforeUpdateCMSFields(function (FieldList $fields) {
+            $casesGridConfig = new GridFieldConfig_RelationEditor();
+            $casesGridConfig->removeComponentsByType([
+                GridFieldAddNewButton::class,
+                GridFieldArchiveAction::class,
+                GridFieldEditButton::class,
+            ]);
+            $casesGridConfig->addComponent(new GridFieldOrderableRows('CasesSort'));
 
-        $casesGridConfig = new GridFieldConfig_RelationEditor();
-        $casesGridConfig->removeComponentsByType([
-            GridFieldAddNewButton::class,
-            GridFieldArchiveAction::class,
-            GridFieldEditButton::class,
-        ]);
-        $casesGridConfig->addComponent(new GridFieldOrderableRows('CasesSort'));
+            $elementalGridConfig = new GridFieldConfig_RecordViewer();
 
-        $elementalGridConfig = new GridFieldConfig_RecordViewer();
-
-        $fields->removeByName([
-            'CasePages',
-            'ElementPortfolios',
-        ]);
-
-        if ($this->exists()) {
-            $fields->addFieldsToTab('Root.Main', [
-                GridField::create('CasePages', 'Cases', $this->CasePages(), $casesGridConfig),
+            $fields->removeByName([
+                'CasePages',
+                'ElementPortfolios',
             ]);
 
-            $fields->addFieldsToTab('Root.Grid elements used on', [
-                GridField::create('ElementPortfolios', 'Grid elements', $this->ElementPortfolios(), $elementalGridConfig),
-            ]);
-        } else {
-            $fields->addFieldsToTab('Root.Main', [
-                new LiteralField('', 'Save the collection first, in order to be able to make changes to the contents of this collection.'),
-            ]);
-        }
+            if ($this->exists()) {
+                $fields->addFieldsToTab('Root.Main', [
+                    GridField::create('CasePages', 'Cases', $this->CasePages(), $casesGridConfig),
+                ]);
 
-        return $fields;
+                $fields->addFieldsToTab('Root.Grid elements used on', [
+                    GridField::create('ElementPortfolios', 'Grid elements', $this->ElementPortfolios(), $elementalGridConfig),
+                ]);
+            } else {
+                $fields->addFieldsToTab('Root.Main', [
+                    new LiteralField('', 'Save the collection first, in order to be able to make changes to the contents of this collection.'),
+                ]);
+            }
+        });
+
+        return parent::getCMSFields();
     }
 }
