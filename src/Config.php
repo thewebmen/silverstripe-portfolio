@@ -17,7 +17,7 @@ class Config implements TemplateGlobalProvider
     public static function get_template_global_variables(): array
     {
         return [
-            'WeDevelopPortfolioConfigIsCustomerEnabled' => 'isCustomerEnabled'
+            'WeDevelopPortfolioConfigIsCustomerEnabled' => 'isCustomerEnabled',
         ];
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace WeDevelop\Portfolio\Models;
 
 use SilverStripe\Forms\FieldList;
@@ -67,37 +69,37 @@ class Customer extends DataObject
 
     public function getCMSFields(): FieldList
     {
-        $fields = parent::getCMSFields();
+        $this->beforeUpdateCMSFields(function (FieldList $fields) {
+            $fields->removeByName(
+                [
+                    'URL',
+                    'CasePages',
+                    'Logo',
+                    'FacebookURL',
+                    'TwitterURL',
+                    'LinkedInURL',
+                ]
+            );
 
-        $fields->removeByName(
-            [
-                'URL',
-                'CasePages',
-                'Logo',
-                'FacebookURL',
-                'TwitterURL',
-                'LinkedInURL',
-            ]
-        );
+            $fields->addFieldsToTab('Root.Cases assigned to', [
+                GridField::create('CasePages', 'Case pages', $this->CasePages(), new GridFieldConfig_RecordViewer()),
+            ]);
 
-        $fields->renameField('Title', 'Name');
+            $fields->addFieldsToTab(
+                'Root.Main',
+                [
+                    UploadField::create('Logo', 'Logo')->setFolderName('Customer_Logos'),
+                    TextField::create('URL', 'URL'),
+                    HeaderField::create('', 'Social media'),
+                    TextField::create('FacebookURL', 'Facebook URL'),
+                    TextField::create('TwitterURL', 'Twitter URL'),
+                    TextField::create('LinkedInURL', 'LinkedIn URL'),
+                ]
+            );
 
-        $fields->addFieldsToTab('Root.Cases assigned to', [
-            GridField::create('CasePages', 'Case pages', $this->CasePages(), new GridFieldConfig_RecordViewer()),
-        ]);
+            $fields->renameField('Title', 'Name');
+        });
 
-        $fields->addFieldsToTab(
-            'Root.Main',
-            [
-                UploadField::create('Logo', 'Logo')->setFolderName('Customer_Logos'),
-                TextField::create('URL', 'URL'),
-                HeaderField::create('', 'Social media'),
-                TextField::create('FacebookURL', 'Facebook URL'),
-                TextField::create('TwitterURL', 'Twitter URL'),
-                TextField::create('LinkedInURL', 'LinkedIn URL'),
-            ]
-        );
-
-        return $fields;
+        return parent::getCMSFields();
     }
 }

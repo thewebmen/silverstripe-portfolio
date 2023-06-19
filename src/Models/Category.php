@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace WeDevelop\Portfolio\Models;
 
 use SilverStripe\CMS\Controllers\CMSPageEditController;
@@ -58,20 +60,20 @@ class Category extends DataObject
 
     public function getCMSFields(): FieldList
     {
-        $fields = parent::getCMSFields();
+        $this->beforeUpdateCMSFields(function (FieldList $fields) {
+            $fields->removeByName([
+                'CasePages',
+                'PortfolioPageID',
+            ]);
 
-        $fields->removeByName([
-            'CasePages',
-            'PortfolioPageID',
-        ]);
+            $fields->addFieldsToTab('Root.Cases assigned to', [
+                GridField::create('CasePages', 'Case pages', $this->CasePages(), new GridFieldConfig_RecordViewer()),
+            ]);
 
-        $fields->addFieldsToTab('Root.Cases assigned to', [
-            GridField::create('CasePages', 'Case pages', $this->CasePages(), new GridFieldConfig_RecordViewer()),
-        ]);
+            $fields->renameField('Title', _t(__CLASS__ . '.TITLE', 'Title'));
+        });
 
-        $fields->renameField('Title', _t(__CLASS__ . '.TITLE', 'Title'));
-
-        return $fields;
+        return parent::getCMSFields();
     }
 
     public function IsActive(): bool
