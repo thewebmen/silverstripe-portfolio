@@ -33,7 +33,9 @@ class PortfolioPageController extends \PageController
 
     protected function getCasesDataList(): ?DataList
     {
-        $cases = CasePage::get()->filter('ParentID', $this->data()->ID);
+        $cases = CasePage::get()->filter([
+            'ParentID' => $this->data()->ID,
+        ])->sort('CaseSort');
 
         $this->extend('updateCasesDataList', $cases);
 

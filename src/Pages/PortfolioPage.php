@@ -6,12 +6,12 @@ use Restruct\Silverstripe\SiteTreeButtons\GridFieldAddNewSiteTreeItemButton;
 use SilverStripe\Control\Controller;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\GridField\GridField;
-use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
 use SilverStripe\Forms\NumericField;
 use SilverStripe\Lumberjack\Forms\GridFieldConfig_Lumberjack;
 use SilverStripe\Lumberjack\Forms\GridFieldSiteTreeAddNewButton;
 use SilverStripe\ORM\DataList;
 use SilverStripe\ORM\HasManyList;
+use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 use WeDevelop\Portfolio\Controllers\PortfolioPageController;
 use WeDevelop\Portfolio\Models\Category;
 use WeDevelop\Portfolio\Models\Customer;
@@ -77,32 +77,26 @@ class PortfolioPage extends \Page
                 ]
             );
 
-            $fields->replaceField(
-                'ChildPages',
-                $this->createGridField(
-                    _t(__CLASS__ . '.CASES', 'Cases'),
-                    CasePage::get()->filter('ParentID', $this->ID)
-                )
-            );
-
             $fields->insertBefore('Cases', NumericField::create('PageLength', 'Items per page'));
         });
 
         return parent::getCMSFields();
     }
 
-    public function getLumberjackTitle(): string
+    public function getLumberjackPagesForGridfield(): DataList
     {
-        return _t(__CLASS__ . '.CASES', 'Cases');
+        return CasePage::get()->filter([
+            'ParentID' => $this->ID,
+        ]);
     }
 
-    private function createGridField(string $title, DataList $list): GridField
+    public function getLumberjackGridFieldConfig()
     {
-        $config = GridFieldConfig_Lumberjack::create()
+        return GridFieldConfig_Lumberjack::create()
             ->removeComponentsByType(GridFieldSiteTreeAddNewButton::class)
+            ->addComponent((new GridFieldOrderableRows('CaseSort'))
+                ->setRepublishLiveRecords(true))
             ->addComponent(new GridFieldAddNewSiteTreeItemButton('buttons-before-left'));
-
-        return GridField::create('Cases', $title, $list, $config);
     }
 
     public function getTitle(): string

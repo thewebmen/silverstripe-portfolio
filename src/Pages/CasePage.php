@@ -53,6 +53,7 @@ class CasePage extends \Page
     /** @config */
     private static array $db = [
         'PublicationDate' => 'Datetime',
+        'CaseSort' => 'Int',
     ];
 
     /** @config */
