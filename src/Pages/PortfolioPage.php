@@ -9,6 +9,7 @@ use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\NumericField;
 use SilverStripe\Lumberjack\Forms\GridFieldConfig_Lumberjack;
 use SilverStripe\Lumberjack\Forms\GridFieldSiteTreeAddNewButton;
+use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
 use SilverStripe\ORM\DataList;
 use SilverStripe\ORM\HasManyList;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
