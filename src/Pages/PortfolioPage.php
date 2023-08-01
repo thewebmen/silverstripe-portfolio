@@ -2,7 +2,7 @@
 
 namespace WeDevelop\Portfolio\Pages;
 
-use Restruct\Silverstripe\SiteTreeButtons\GridFieldAddNewSiteTreeItemButton;
+use WeDevelop\SiteTreeButtons\GridFieldAddNewSiteTreeItemButton;
 use SilverStripe\Control\Controller;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\GridField\GridField;
