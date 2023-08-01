@@ -22,7 +22,7 @@
         "symbiote/silverstripe-gridfieldextensions": "^4.0"
     },
     "require-dev": {
-      "friendsofphp/php-cs-fixer": "^3.4"
+      "friendsofphp/php-cs-fixer": "^3.20"
     },
     "extra": {
         "installer-name": "silverstripe-portfolio",
