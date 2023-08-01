@@ -12,14 +12,14 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": ">=8.1",
-        "silverstripe/cms": "^4@stable",
-        "silverstripe/vendor-plugin": "^1.0",
-        "silverstripe/lumberjack": "^2.0",
-        "micschk/silverstripe-gridfieldsitetreebuttons": "^2.0",
-        "symbiote/silverstripe-gridfieldextensions": "^3.6",
-        "silverstripe/tagfield": "^2.7",
-        "unclecheese/display-logic": "^2.0"
+        "php": "^8.1",
+        "silverstripe/framework": "^5.0",
+        "silverstripe/vendor-plugin": "^2.0",
+        "silverstripe/lumberjack": "^3.0",
+        "silverstripe/tagfield": "^3.0",
+        "unclecheese/display-logic": "^3.0",
+        "wedevelopnl/silverstripe-gridfieldsitetreebuttons": "^1.0",
+        "symbiote/silverstripe-gridfieldextensions": "^4.0"
     },
     "require-dev": {
       "friendsofphp/php-cs-fixer": "^3.4"
@@ -27,7 +27,7 @@
     "extra": {
         "installer-name": "silverstripe-portfolio",
         "branch-alias": {
-            "dev-main": "1.x-dev"
+            "dev-main": "2.x-dev"
         },
         "expose": [
             "client/dist"
@@ -41,7 +41,7 @@
     "config": {
         "allow-plugins": {
             "composer/installers": false,
-            "silverstripe/vendor-plugin": false,
+            "silverstripe/vendor-plugin": true,
             "silverstripe/recipe-plugin": false
         }
     }
