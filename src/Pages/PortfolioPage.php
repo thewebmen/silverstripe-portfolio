@@ -77,11 +77,15 @@ class PortfolioPage extends \Page
                     ),
                 ]
             );
-
-            $fields->insertBefore('Cases', NumericField::create('PageLength', 'Items per page'));
         });
 
-        return parent::getCMSFields();
+        $fields = parent::getCMSFields();
+
+        $fields->removeByName(['PageLength']);
+
+        $fields->addFieldsToTab('Root.ChildPages', NumericField::create('PageLength'), 'ChildPages');
+
+        return $fields;
     }
 
     public function getLumberjackPagesForGridfield(): DataList
@@ -98,6 +102,11 @@ class PortfolioPage extends \Page
             ->addComponent((new GridFieldOrderableRows('CaseSort'))
                 ->setRepublishLiveRecords(true))
             ->addComponent(new GridFieldAddNewSiteTreeItemButton('buttons-before-left'));
+    }
+
+    public function getLumberjackTitle(): string
+    {
+        return _t(__CLASS__ . '.CASES', 'Cases');
     }
 
     public function getTitle(): string

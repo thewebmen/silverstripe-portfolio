@@ -162,11 +162,11 @@ class ElementPortfolio extends BaseElement
     public function getCases(): ?DataList
     {
         if ($this->Mode === self::MODE_CUSTOM && $this->CasePages()) {
-            return $this->CasePages()->Sort('CasesSort');
+            return $this->CasePages()->Limit($this->MaxAmount)->Sort('CasesSort');
         }
 
         if ($this->Mode === self::MODE_COLLECTION && $this->Collection()->exists()) {
-            return $this->Collection()->CasePages()->Sort('CasesSort');
+            return $this->Collection()->CasePages()->Limit($this->MaxAmount)->Sort('CasesSort');
         }
 
         return null;

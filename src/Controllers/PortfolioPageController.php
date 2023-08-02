@@ -4,6 +4,7 @@ namespace WeDevelop\Portfolio\Controllers;
 
 use SilverStripe\ORM\DataList;
 use SilverStripe\ORM\PaginatedList;
+use SilverStripe\View\Requirements;
 use WeDevelop\Portfolio\Forms\CasesFilterForm;
 use WeDevelop\Portfolio\Pages\CasePage;
 use WeDevelop\Portfolio\Pages\PortfolioPage;
@@ -45,6 +46,8 @@ class PortfolioPageController extends \PageController
     public function init(): ?DataList
     {
         parent::init();
+
+        Requirements::javascript('wedevelopnl/silverstripe-portfolio:client/dist/main.js');
 
         $this->cases = $this->getCasesDataList();
 
