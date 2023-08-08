@@ -47,14 +47,4 @@ class CasesFilterForm extends Form
         $this->setFormMethod('GET');
         $this->disableSecurityToken();
     }
-
-    /**
-     * @return DBHTMLText
-     */
-    public function forTemplate()
-    {
-        Requirements::javascript('wedevelopnl/silverstripe-portfolio:client/dist/main.js');
-
-        return parent::forTemplate();
-    }
 }

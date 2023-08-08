@@ -102,4 +102,9 @@ class Category extends DataObject
 
         parent::onBeforeWrite();
     }
+
+    public function getFilterSlug(): string
+    {
+        return $this->Slug;
+    }
 }

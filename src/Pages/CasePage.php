@@ -4,8 +4,11 @@ namespace WeDevelop\Portfolio\Pages;
 
 use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Assets\Image;
+use SilverStripe\Forms\DatetimeField;
 use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\FieldGroup;
 use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\FieldType\DBDatetime;
 use SilverStripe\ORM\ManyManyList;
 use SilverStripe\TagField\TagField;
@@ -53,6 +56,7 @@ class CasePage extends \Page
     /** @config */
     private static array $db = [
         'PublicationDate' => 'Datetime',
+        'UpdatedDate' => 'Datetime',
         'CaseSort' => 'Int',
     ];
 
@@ -96,7 +100,16 @@ class CasePage extends \Page
                     _t('WeDevelop\Portfolio\Models\Customer.SINGULARNAME', 'Customer'),
                     Customer::get()->map()->toArray()
                 )->setHasEmptyDefault(true),
-                UploadField::create('Thumbnail', _t(__CLASS__ . '.THUMBNAIL', 'Thumbnail')),
+                UploadField::create('Thumbnail', _t(__CLASS__ . '.THUMBNAIL', 'Thumbnail'))
+                    ->setFolderName('CaseThumbnails'),
+                FieldGroup::create(
+                    [
+                        DatetimeField::create('PublicationDate', _t(__CLASS__ . '.PUBLICATIONDATE', 'Publication date')),
+                        DatetimeField::create('UpdatedDate', _t(__CLASS__ . '.UPDATEDATE', 'Update date')),
+                    ]
+                )
+                    ->setName('ArticleMetadata')
+                    ->setTitle(_t(__CLASS__ . '.METADATA', 'Metadata'))
             ]);
 
             if (!Config::isCustomerEnabled()) {
