@@ -92,7 +92,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   const casesFilterForm = document.getElementById('WeDevelop_Portfolio_CasesFilterForm');
 
-  casesFilterForm.addEventListener('submit', (e) => {
+  casesFilterForm?.addEventListener('submit', (e) => {
     const { target } = e;
     const formData = {};
 
