@@ -84,7 +84,7 @@ window.addEventListener('DOMContentLoaded', function () {
     });
   }
   var casesFilterForm = document.getElementById('WeDevelop_Portfolio_CasesFilterForm');
-  casesFilterForm.addEventListener('submit', function (e) {
+  casesFilterForm?.addEventListener('submit', function (e) {
     var target = e.target;
     var formData = {};
     for (var i = 0; i < target.length; i += 1) {
