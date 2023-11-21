@@ -94,7 +94,10 @@ class CasePage extends \Page
                     _t('WeDevelop\Portfolio\Models\Category.PLURALNAME', 'Categories'),
                     Category::get()->filter('PortfolioPageID', $this->ParentID),
                     $this->Categories(),
-                )->setCanCreate(false),
+                ),
+                // Disabled `setCanCreate` because of a bug in the tagfield module.
+                // @see https://github.com/silverstripe/silverstripe-tagfield/issues/267
+                //->setCanCreate(false),
                 DropdownField::create(
                     'CustomerID',
                     _t('WeDevelop\Portfolio\Models\Customer.SINGULARNAME', 'Customer'),
