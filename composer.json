@@ -24,6 +24,9 @@
     "require-dev": {
       "friendsofphp/php-cs-fixer": "^3.4"
     },
+    "conflict": {
+        "silverstripe/tagfield": "2.11.2"
+    },
     "extra": {
         "installer-name": "silverstripe-portfolio",
         "branch-alias": {

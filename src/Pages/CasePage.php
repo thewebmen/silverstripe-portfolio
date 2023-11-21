@@ -9,12 +9,12 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\FieldType\DBDatetime;
 use SilverStripe\ORM\ManyManyList;
 use SilverStripe\TagField\TagField;
+use WeDevelop\Portfolio\Config;
 use WeDevelop\Portfolio\Controllers\PortfolioPageController;
 use WeDevelop\Portfolio\ElementalGrid\ElementPortfolio;
 use WeDevelop\Portfolio\Models\Category;
 use WeDevelop\Portfolio\Models\Collection;
 use WeDevelop\Portfolio\Models\Customer;
-use WeDevelop\Portfolio\Config;
 
 /**
  * @property DBDatetime $PublicationDate
@@ -90,10 +90,7 @@ class CasePage extends \Page
                     _t('WeDevelop\Portfolio\Models\Category.PLURALNAME', 'Categories'),
                     Category::get()->filter('PortfolioPageID', $this->ParentID),
                     $this->Categories(),
-                ),
-                // Disabled `setCanCreate` because of a bug in the tagfield module.
-                // @see https://github.com/silverstripe/silverstripe-tagfield/issues/267
-                //->setCanCreate(false),
+                )->setCanCreate(false),
                 DropdownField::create(
                     'CustomerID',
                     _t('WeDevelop\Portfolio\Models\Customer.SINGULARNAME', 'Customer'),
