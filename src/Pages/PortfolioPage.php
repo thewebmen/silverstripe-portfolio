@@ -100,6 +100,11 @@ class PortfolioPage extends \Page
             ->addComponent(new GridFieldAddNewSiteTreeItemButton('buttons-before-left'));
     }
 
+    public function getLumberjackTitle(): string
+    {
+        return _t(__CLASS__ . '.CASES', 'Cases');
+    }
+
     public function getTitle(): string
     {
         $controller = Controller::curr();
