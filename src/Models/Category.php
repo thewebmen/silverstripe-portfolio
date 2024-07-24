@@ -91,11 +91,13 @@ class Category extends DataObject
     }
     protected function onBeforeWrite(): void
     {
-        $currentPageID = CMSPageEditController::curr()->currentPageID();
-        $currentPage = \Page::get_by_id(CasePage::class, $currentPageID);
+        if (empty($this->PortfolioPageID)) {
+            $currentPageID = CMSPageEditController::curr()->currentPageID();
+            $currentPage = \Page::get_by_id(CasePage::class, $currentPageID);
 
-        if ($currentPage) {
-            $this->PortfolioPageID = $currentPage->ParentID;
+            if ($currentPage) {
+                $this->PortfolioPageID = $currentPage->ParentID;
+            }
         }
 
         $this->Slug = URLSegmentFilter::create()->filter(!empty($this->Slug) ? $this->Slug : $this->Title);
