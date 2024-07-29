@@ -6,6 +6,7 @@ namespace WeDevelop\Portfolio\Models;
 
 use SilverStripe\CMS\Controllers\CMSPageEditController;
 use SilverStripe\Control\Controller;
+use SilverStripe\Dev\TaskRunner;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldConfig_RecordViewer;
@@ -91,8 +92,9 @@ class Category extends DataObject
     }
     protected function onBeforeWrite(): void
     {
-        if (empty($this->PortfolioPageID)) {
-            $currentPageID = CMSPageEditController::curr()->currentPageID();
+        $currentController = CMSPageEditController::curr();
+        if (!($currentController instanceof TaskRunner)) {
+            $currentPageID = $currentController->currentPageID();
             $currentPage = \Page::get_by_id(CasePage::class, $currentPageID);
 
             if ($currentPage) {
